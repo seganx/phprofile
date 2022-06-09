@@ -10,7 +10,7 @@ class database
         $this->conn = $dbconn;
     }
 
-    public function query(string $query)
+    public function query($query)
     {
         $this->close_result();
         $res = $this->conn->query($query);
@@ -19,7 +19,7 @@ class database
         return $res;
     }
 
-    public function multi_query(string $query) : bool
+    public function multi_query($query)
     {
         $this->close_result();
         $res = $this->conn->multi_query($query);   
@@ -32,22 +32,22 @@ class database
         return $res;
     }
 
-    public function has_result() : bool
+    public function has_result()
     {
         return $this->result != null && $this->result->num_rows > 0;
     }
 
-    public function no_result() : bool
+    public function no_result()
     {
         return $this->result == null || $this->result->num_rows == 0;
     }
     
-    public function error() : string
+    public function error()
     {
         return $this->conn->error;
     }
 
-    public function insert_id() : int
+    public function insert_id()
     {
         return $this->conn->insert_id;
     }
@@ -67,6 +67,11 @@ class database
     
     public static function connect()
     {
+
+        $databasename = "seganxc1_games";
+        $username = "seganxc1_games";
+        $servername = "localhost";
+        $password = "6qVBt04DtjZmx86F";
 
         // create new database
         $conn = new mysqli($servername, $username, $password, $databasename);

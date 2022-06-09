@@ -81,7 +81,7 @@ function queue_add($msg)
     return file_put_contents(dirname(__FILE__) . "/queue/" . time() . ".txt", $msg, FILE_APPEND | LOCK_EX);
 }
 
-function is_day_interval(int $startday, int $duration)
+function is_day_interval($startday, $duration)
 {
   	$current = (int)round(time() / 86400);
   	$delta = $current - $startday;
@@ -89,12 +89,12 @@ function is_day_interval(int $startday, int $duration)
   	return $remain == 0 ? true : false;
 }
 
-function id_to_username(int $id)
+function id_to_username($id)
 {
     return base_convert(1000000 + $id, 10, 32);
 }
 
-function username_to_id(string $username)
+function username_to_id($username)
 {
     return base_convert($username, 32, 10) - 1000000;
 }
