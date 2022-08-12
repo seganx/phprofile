@@ -81,22 +81,6 @@ function queue_add($msg)
     return file_put_contents(dirname(__FILE__) . "/queue/" . time() . ".txt", $msg, FILE_APPEND | LOCK_EX);
 }
 
-function is_day_interval($mode)
-{
-	$time = time();
-    $totalDays = (int)round($time / 86400) - 91;
-    $totalYears = (int)round($totalDays / 365);
-    $days = $totalDays % 365;
-	$day = ($days < 190) ? ($days % 31) : ($days - 186) % 30;
-    
-    if ($mode == "daily")
-    	return true;
-    else if ($mode == "weekly")
-    	return ($days + 1) % 7 == 0;
-    else if ($mode == "monthly")
-    	return $day == 0;
-}
-
 function id_to_username($id)
 {
     return base_convert(1000000 + $id, 10, 32);

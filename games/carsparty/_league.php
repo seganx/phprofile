@@ -1,18 +1,9 @@
 <?php
-
-class sxerror
-{
-    const server_maintenance = "server_maintenance";
-    const invalid_token = "invalid_token";
-    const invalid_params = "invalid_params";
-    const account_transfered = "account_transfered";
-}
-
 class league
 {
-    const mode_daily = "daily";
-    const mode_weekly = "weekly";
-    const mode_monthly = "monthly";
+    public const mode_daily = "daily";
+    public const mode_weekly = "weekly";
+    public const mode_monthly = "monthly";
     
     public $id = 0;
     public $base_score = 1000;
@@ -27,7 +18,7 @@ class league
         $this->mode = $mode;
     }
 
-    public function is_ended()
+    public function days_left()
     {
 	    $time = time();
         $totalDays = (int)round($time / 86400) - 91;
@@ -35,13 +26,17 @@ class league
         $days = $totalDays % 365;
 	    $day = ($days < 190) ? ($days % 31) : ($days - 186) % 30;
     
-        if (this->$mode == "daily")
-    	    return true;
-        else if (this->$mode == "weekly")
-    	    return ($days + 1) % 7 == 0;
-        else if (this->$mode == "monthly")
-    	    return $day == 0;
+        if ($this->$mode == self::mode_daily)
+    	    return 0;
+        else if ($this->$mode == self::mode_weekly)
+    	    return (($days + 1) % 7);
+        else if ($this->$mode == self::mode_monthly)
+    	    return $day;
+    }
+	
+	public function is_ended()
+    {
+	    return $this->days_left() == 0;
     }
 }
-
 ?>
