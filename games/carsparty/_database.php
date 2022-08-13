@@ -1,5 +1,7 @@
 <?php
 
+require '_configs.php';
+
 class database
 {
     public $conn = null;
@@ -22,12 +24,12 @@ class database
     public function multi_query($query)
     {
         $this->close_result();
-        $res = $this->conn->multi_query($query);   
-        do 
+        $res = $this->conn->multi_query($query);
+        do
         {
             if ($tmp = $this->conn->store_result())
                 $tmp->free();
-        } 
+        }
         while ($this->conn->more_results() && $this->conn->next_result());
         return $res;
     }
@@ -41,7 +43,7 @@ class database
     {
         return $this->result == null || $this->result->num_rows == 0;
     }
-    
+
     public function error()
     {
         return $this->conn->error;
@@ -64,17 +66,12 @@ class database
         $this->close_result();
         if ($this->conn != null) $this->conn->close();
     }
-    
+
     public static function connect()
     {
 
-        $databasename = "seganxc1_games";
-        $username = "seganxc1_games";
-        $servername = "localhost";
-        $password = "6qVBt04DtjZmx86F";
-
         // create new database
-        $conn = new mysqli($servername, $username, $password, $databasename);
+        $conn = new mysqli(configs::database_servername, configs::database_username, configs::database_password, configs::database_name);
         if ($conn->connect_error)
         {
             error_log("Can not connect to database du to $conn->connect_error");

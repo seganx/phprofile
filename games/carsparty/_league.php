@@ -9,7 +9,7 @@ class league
     public $base_score = 1000;
     public $max_value = 30;
     public $mode = "";
-    
+
     function __construct ($id, $base_score, $max_value, $mode)
     {
         $this->id = $id;
@@ -37,6 +37,18 @@ class league
 	public function is_ended()
     {
 	    return $this->days_left() == 0;
+    }
+
+    public static function get_all_leagues()
+    {
+        $res = array();
+        
+        $res[1] = new league(1, 0, 15, league::mode_weekly);
+        $res[2] = new league(2, 0, 15, league::mode_weekly);
+        $res[3] = new league(3, 0, 15, league::mode_weekly);
+        $res[4] = new league(4, 0, 15, league::mode_weekly);
+        
+        return $res;
     }
 }
 ?>

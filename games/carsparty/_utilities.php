@@ -1,5 +1,7 @@
 <?php
 
+require '_configs.php';
+
 function get_header_token()
 {
     return $_SERVER['HTTP_TOKEN'];
@@ -60,7 +62,7 @@ function parse_token($token)
     $parts = explode('_', $token);
     if (count($parts) != 2) return null;
 
-    $crc32 = strval(crc32($parts[0] . "seganx_games"));
+    $crc32 = strval(crc32($parts[0] . configs::token_salt));
     if ($crc32 === $parts[1])
     {
         $json = base64_decode($parts[0]);

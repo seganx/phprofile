@@ -41,7 +41,7 @@ $tokenobj->profile_id = $prof['id'];
 $tokenobj->device_id = $prof['device_id'];
 
 $token = base64_encode(json_encode($tokenobj));
-$token .= "_" . crc32($token . "seganx_games");
+$token .= "_" . crc32($token . configs::token_salt);
 
 send("ok", $token);
 ?>
