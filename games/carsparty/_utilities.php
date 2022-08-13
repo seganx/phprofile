@@ -26,15 +26,15 @@ function hash_base($number, $frombase, $tobase)
 {
     $res = base_convert($number, $frombase, $tobase);
     //$res = base64_encode($number);
-    $res = str_replace("+", "", $res);
-    $res = str_replace("=", "", $res);
-    $res = str_replace("/", "", $res);
+    $res = str_replace('+', '', $res);
+    $res = str_replace('=', '', $res);
+    $res = str_replace('/', '', $res);
     return $res;
 }
 
 function send_headers()
 {
-    header("Connection: close");
+    header('Connection: close');
     header('Cache-Control: no-cache');
     header('Content-type: application/json');
 }
@@ -80,7 +80,7 @@ function get_token()
 
 function queue_add($msg)
 {
-    return file_put_contents(dirname(__FILE__) . "/queue/" . time() . ".txt", $msg, FILE_APPEND | LOCK_EX);
+    return file_put_contents(dirname(__FILE__) . '/queue/' . time() . '.txt', $msg, FILE_APPEND | LOCK_EX);
 }
 
 function id_to_username($id)

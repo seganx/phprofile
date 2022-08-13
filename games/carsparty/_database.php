@@ -69,9 +69,8 @@ class database
 
     public static function connect()
     {
-
-        // create new database
         $conn = new mysqli(configs::database_servername, configs::database_username, configs::database_password, configs::database_name);
+
         if ($conn->connect_error)
         {
             error_log("Can not connect to database du to $conn->connect_error");

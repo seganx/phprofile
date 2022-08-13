@@ -10,6 +10,8 @@ Assets/AssetStoreTools*
 
 Editor/.vs/
 
+_configs.php
+
 # Visual Studio 2015 cache directory
 /.vs/
 *.log

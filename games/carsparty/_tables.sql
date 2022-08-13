@@ -13,6 +13,7 @@ CREATE TABLE `profile` (
 DROP TABLE IF EXISTS `profile_data`;
 CREATE TABLE `profile_data` (
   `profile_id` int(10) unsigned NOT NULL PRIMARY KEY,
+  `username` varchar(64) CHARACTER SET ascii DEFAULT NULL,
   `private_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
   `public_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
   INDEX (`username`)
