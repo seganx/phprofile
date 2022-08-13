@@ -1,7 +1,5 @@
 <?php
 
-require '_configs.php';
-
 function get_header_token()
 {
     return $_SERVER['HTTP_TOKEN'];

@@ -1,7 +1,5 @@
 <?php
 
-require '_configs.php';
-
 class database
 {
     public $conn = null;
