@@ -19,18 +19,14 @@ if ($db == null)
     exit();
 }
 
-$userdata = get_post_json();
-$userdata->username = addslashes($userdata->username);
-$profile_id = username_to_id($userdata->username);
-
-$db->query("SELECT public_data FROM profile_data WHERE profile_id=$profile_id");
+$db->query("SELECT private_data FROM profile_data WHERE profile_id=$token->profile_id");
 if ($db->has_result())
 {
-    send("ok", $db->result->fetch_assoc()['public_data']);
+    send("ok", $db->result->fetch_assoc()['private_data']);
 }
 else
 {
-    send_error(sxerror::invalid_params);
+    send("ok", null);
 }
 $db->close();
 
