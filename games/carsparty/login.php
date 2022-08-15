@@ -8,7 +8,7 @@ require '_utilities.php';
 $userjson= get_post_json();
 $userjson->device_id = addslashes($userjson->device_id);
 
-if ($userjson->game_id != configs::game_id || $userjson->device_id == 'none')
+if ($userjson->game_id != configs::game_id || strlen($userjson->device_id) != 32 || empty($userjson->device_id))
 {
     send_error(sxerror::invalid_params);
     exit();

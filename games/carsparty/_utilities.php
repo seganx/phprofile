@@ -15,7 +15,7 @@ function get_post_json()
     return json_decode(get_post_data());
 }
 
-function clamp($current, $min, $max) 
+function clamp($current, $min, $max)
 {
     return max($min, min($max, $current));
 }
@@ -37,7 +37,7 @@ function send_headers()
     header('Content-type: application/json');
 }
 
-function send($msg, $data)
+function send(string $msg, mixed $data)
 {
     send_Headers();
     $res = new stdClass();
@@ -46,16 +46,15 @@ function send($msg, $data)
     echo json_encode($res);
 }
 
-function send_error($error)
+function send_error(string $error)
 {
     send_Headers();
     $res = new stdClass();
     $res->msg = $error;
     echo json_encode($res);
-    
 }
 
-function parse_token($token)
+function parse_token(string $token)
 {
     $parts = explode('_', $token);
     if (count($parts) != 2) return null;
@@ -66,27 +65,27 @@ function parse_token($token)
         $json = base64_decode($parts[0]);
         return json_decode($json);
     }
-    
+
     return null;
 }
 
-function get_token()
+function get_token(): mixed
 {
     $token = get_header_token();
     return empty($token) ? null : parse_token($token);
 }
 
-function queue_add($msg)
+function queue_add(string $msg): bool
 {
     return file_put_contents(dirname(__FILE__) . '/queue/' . time() . '.txt', $msg, FILE_APPEND | LOCK_EX);
 }
 
-function id_to_username($id)
+function id_to_username(int $id) : string
 {
     return base_convert(1000000 + $id, 10, 32);
 }
 
-function username_to_id($username)
+function username_to_id(string $username): int
 {
     return base_convert($username, 32, 10) - 1000000;
 }

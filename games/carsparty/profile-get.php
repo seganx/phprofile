@@ -19,21 +19,15 @@ if ($db == null)
     exit();
 }
 
-$prof = null;
 $db->query("SELECT username, password, nickname, status, avatar FROM profile WHERE id=$token->profile_id");
 if ($db->has_result())
 {
-    $prof = $db->result->fetch_assoc();
-}
-$db->close();
-
-if (empty($prof))
-{
-    send_error(sxerror::invalid_token);
+    send("ok", $db->result->fetch_assoc());
 }
 else
 {
-    send("ok", $prof);
+    send_error(sxerror::invalid_token);
 }
+$db->close();
 
 ?>

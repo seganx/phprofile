@@ -10,7 +10,7 @@ class database
         $this->conn = $dbconn;
     }
 
-    public function query($query)
+    public function query(string $query)
     {
         $this->close_result();
         $res = $this->conn->query($query);
@@ -19,7 +19,7 @@ class database
         return $res;
     }
 
-    public function multi_query($query)
+    public function multi_query(string $query)
     {
         $this->close_result();
         $res = $this->conn->multi_query($query);
@@ -32,12 +32,12 @@ class database
         return $res;
     }
 
-    public function has_result()
+    public function has_result(): bool
     {
         return $this->result != null && $this->result->num_rows > 0;
     }
 
-    public function no_result()
+    public function no_result(): bool
     {
         return $this->result == null || $this->result->num_rows == 0;
     }
@@ -47,7 +47,7 @@ class database
         return $this->conn->error;
     }
 
-    public function insert_id()
+    public function insert_id(): int
     {
         return $this->conn->insert_id;
     }

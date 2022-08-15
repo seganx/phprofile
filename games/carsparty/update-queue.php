@@ -1,19 +1,19 @@
 <?php
 
+require '_configs.php';
 require '_database.php';
 
 function dequeue()
 {
     $queries = "";
-    
-    // read all files from queue folder
+
     $cwdir = dirname(__FILE__) . "/queue";
     $files = scandir($cwdir);
-    
+
     // validate number of files
     $files_count = count($files);
-    if ($files_count > 3) $files_count -= 1;
-    
+    if ($files_count < 3) return;
+
     // read all contents to string
     for ($i=2; $i < $files_count; $i++)
     {
@@ -21,12 +21,12 @@ function dequeue()
         $queries .= file_get_contents($path);
         unlink($path);
     }
-    
+
     // verify query loaded
     if (empty($queries) == false)
-    {        
+    {
         $db = database::connect();
-        if ($db != null) 
+        if ($db != null)
         {
             $db->multi_query($queries);
             $db->close();
@@ -34,8 +34,8 @@ function dequeue()
     }
 }
 
-for ($i=0; $i < 60; $i++) 
-{ 
+for ($i=0; $i < 60; $i++)
+{
     sleep(1);
     dequeue();
 }

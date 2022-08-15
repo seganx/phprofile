@@ -4,7 +4,7 @@ class league
     public const mode_daily = 'daily';
     public const mode_weekly = 'weekly';
     public const mode_monthly = 'monthly';
-    
+
     public $id = 0;
     public $base_score = 1000;
     public $max_value = 30;
@@ -18,22 +18,23 @@ class league
         $this->mode = $mode;
     }
 
-    public function days_left()
+    public function days_left(): int
     {
 	    $time = time();
         $totalDays = (int)round($time / 86400) - 91;
         $days = $totalDays % 365;
 	    $day = ($days < 190) ? ($days % 31) : ($days - 186) % 30;
-    
-        if ($this->mode == self::mode_daily)
-    	    return 0;
-        else if ($this->mode == self::mode_weekly)
-    	    return (($days + 1) % 7);
-        else if ($this->mode == self::mode_monthly)
-    	    return $day;
+
+        switch ($this->mode)
+        {
+            case self::mode_weekly: return (($days + 1) % 7);
+            case self::mode_monthly: return $day;
+        }
+
+        return 0;
     }
-	
-	public function is_ended()
+
+	public function is_ended(): bool
     {
 	    return $this->days_left() == 0;
     }
@@ -41,12 +42,12 @@ class league
     public static function get_all_leagues()
     {
         $res = array();
-        
+
         $res[1] = new league(1, 0, 15, league::mode_weekly);
         $res[2] = new league(2, 0, 15, league::mode_weekly);
         $res[3] = new league(3, 0, 15, league::mode_weekly);
         $res[4] = new league(4, 0, 15, league::mode_weekly);
-        
+
         return $res;
     }
 }

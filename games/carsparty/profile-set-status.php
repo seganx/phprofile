@@ -1,14 +1,14 @@
 <?php
 
-require '_classes.php';
-require '_database.php';
+require '_errors.php';
+require '_configs.php';
 require '_utilities.php';
 
 $token = get_token();
 if ($token == null)
 {
     send_error(sxerror::invalid_token);
-    exit();	
+    exit();
 }
 
 $userdata = get_post_json();
