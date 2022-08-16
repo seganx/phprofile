@@ -29,10 +29,10 @@ if ($db == null)
 $userdata->username = addslashes($userdata->username);
 $profile_id = username_to_id($userdata->username);
 
-$db->query("SELECT public_data FROM profile_data WHERE profile_id=$profile_id");
+$db->query("SELECT public_data FROM profile_data WHERE profile_id={$profile_id}");
 if ($db->has_result())
 {
-    send("ok", $db->result->fetch_assoc()['public_data']);
+    send('ok', $db->result->fetch_assoc()['public_data']);
 }
 else
 {

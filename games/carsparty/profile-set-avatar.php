@@ -13,8 +13,8 @@ if ($token == null)
 
 $userdata = get_post_json();
 $userdata->avatar = addslashes($userdata->avatar);
-if (queue_add("UPDATE profile SET avatar='$userdata->avatar' WHERE id='$token->profile_id'"))
-    send("ok", null);
+if (queue_add("UPDATE profile SET avatar='{$userdata->avatar}' WHERE id='{$token->profile_id}'"))
+    send('ok', null);
 else
     send_error(sxerror::invalid_params);
 ?>

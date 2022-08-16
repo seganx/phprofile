@@ -71,7 +71,7 @@ class database
 
         if ($conn->connect_error)
         {
-            error_log("Can not connect to database du to $conn->connect_error");
+            error_log("Can not connect to database du to {$conn->connect_error}");
             return null;
         }
         else

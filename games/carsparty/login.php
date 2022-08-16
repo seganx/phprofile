@@ -25,16 +25,16 @@ $tokenobj = new stdClass();
 $tokenobj->game_id = $userjson->game_id;
 $tokenobj->device_id = $userjson->device_id;
 
-$db->query("SELECT id FROM profile WHERE device_id='$userjson->device_id'");
+$db->query("SELECT id FROM profile WHERE device_id='{$userjson->device_id}'");
 if ($db->no_result())
 {
-    $db->query("INSERT INTO profile (device_id) VALUES ('$userjson->device_id')");
+    $db->query("INSERT INTO profile (device_id) VALUES ('{$userjson->device_id}')");
     $tokenobj->profile_id = ''.$db->insert_id();
     $username = id_to_username($tokenobj->profile_id);
     $password = hash_base(rand(1000000000, 4000000000), 10, 32);
-    $db->query("UPDATE profile SET username='$username', password='$password' WHERE id=$tokenobj->profile_id");
+    $db->query("UPDATE profile SET username='{$username}', password='{$password}' WHERE id={$tokenobj->profile_id}");
 
-    queue_add("INSERT INTO profile_data (profile_id) VALUES ('$tokenobj->profile_id')");
+    queue_add("INSERT INTO profile_data (profile_id) VALUES ('{$tokenobj->profile_id}')");
 }
 else
 {

@@ -30,7 +30,7 @@ if ($db == null)
 }
 
 // search for target profile
-$db->query("SELECT id FROM profile WHERE username='$userjson->username' and password='$userjson->password'");
+$db->query("SELECT id FROM profile WHERE username='{$userjson->username}' and password='{$userjson->password}'");
 if ($db->no_result())
 {
     send_error(sxerror::invalid_userpass);
@@ -39,10 +39,10 @@ if ($db->no_result())
 $targetProfileId = $db->result->fetch_assoc()['id'];
 
 // detach current profile
-$db->query("UPDATE profile SET device_id='none' WHERE id=$usertoken->profile_id");
+$db->query("UPDATE profile SET device_id='none' WHERE id={$usertoken->profile_id}");
 
 // attach to the profile
-$db->query("UPDATE profile SET device_id='$usertoken->device_id' WHERE id=$targetProfileId");
+$db->query("UPDATE profile SET device_id='{$usertoken->device_id}' WHERE id={$targetProfileId}");
 
 $db->close();
 

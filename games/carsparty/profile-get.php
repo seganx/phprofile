@@ -19,10 +19,10 @@ if ($db == null)
     exit();
 }
 
-$db->query("SELECT username, password, nickname, status, avatar FROM profile WHERE id=$token->profile_id");
+$db->query("SELECT username, password, nickname, status, avatar FROM profile WHERE id={$token->profile_id}");
 if ($db->has_result())
 {
-    send("ok", $db->result->fetch_assoc());
+    send('ok', $db->result->fetch_assoc());
 }
 else
 {

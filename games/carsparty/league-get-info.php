@@ -32,7 +32,7 @@ if ($db == null)
 }
 
 $result = new stdClass();
-$db->query("SELECT score, rank, end_score, end_rank FROM league_{$userdata->name} WHERE profile_id=$token->profile_id");
+$db->query("SELECT score, rank, end_score, end_rank FROM league_{$userdata->name} WHERE profile_id={$token->profile_id}");
 if ($db->has_result())
 {
     $row = $db->result->fetch_assoc();
@@ -49,7 +49,7 @@ else
     $result->end_score = 0;
     $result->end_rank = 0;
 
-    if (queue_add("INSERT INTO league_{$userdata->name} (profile_id, score, rank) VALUES ('$token->profile_id', '$result->score', '$result->rank')"))
+    if (queue_add("INSERT INTO league_{$userdata->name} (profile_id, score, rank) VALUES ('{$token->profile_id}', '{$result->score}', '{$result->rank}')"))
     {
         send('ok', $result);
     }
