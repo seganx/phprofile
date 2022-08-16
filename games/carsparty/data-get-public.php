@@ -12,6 +12,13 @@ if ($token == null)
     exit();
 }
 
+$userdata = get_post_json();
+if (!isset($userdata->username))
+{
+    send_error(sxerror::invalid_token);
+    exit();
+}
+
 $db = database::connect();
 if ($db == null)
 {
@@ -19,7 +26,6 @@ if ($db == null)
     exit();
 }
 
-$userdata = get_post_json();
 $userdata->username = addslashes($userdata->username);
 $profile_id = username_to_id($userdata->username);
 

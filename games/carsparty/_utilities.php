@@ -1,8 +1,11 @@
 <?php
 
-function get_header_token()
+function get_header_token(): string
 {
-    return $_SERVER['HTTP_TOKEN'];
+	if (array_key_exists('HTTP_TOKEN', $_SERVER))
+    	return $_SERVER['HTTP_TOKEN'];
+	else
+		return '';
 }
 
 function get_post_data()

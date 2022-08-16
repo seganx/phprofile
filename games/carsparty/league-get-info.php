@@ -6,6 +6,7 @@ require '_league.php';
 require '_database.php';
 require '_utilities.php';
 
+
 $token = get_token();
 if ($token == null)
 {

@@ -17,5 +17,4 @@ if (queue_add("UPDATE profile SET avatar='$userdata->avatar' WHERE id='$token->p
     send("ok", null);
 else
     send_error(sxerror::invalid_params);
-
 ?>
