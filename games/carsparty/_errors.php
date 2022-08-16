@@ -7,7 +7,6 @@ class sxerror
     public const invalid_params = 'invalid_params';
     public const invalid_userpass = 'invalid_userpass';
     public const account_transfered = 'account_transfered';
-    public const league_empty = 'league_empty';
 }
 
 ?>

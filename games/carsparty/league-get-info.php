@@ -34,11 +34,20 @@ if ($db == null)
 $db->query("SELECT score, rank, end_score, end_rank FROM league WHERE profile_id=$token->profile_id AND league_id=$userdata->id");
 if ($db->has_result())
 {
-    send("ok", $db->result->fetch_assoc());
+    send('ok', $db->result->fetch_assoc());
 }
 else
 {
-    send_error(sxerror::league_empty);
+    if (queue_add("INSERT INTO league (profile_id, league_id, score) VALUES ('$token->profile_id','$userdata->id', '$league->base_score');"))
+    {
+        $temp = new stdClass();
+        $temp->score = $league->base_score;
+        $temp->rank = rand(100000, 400000);
+        $temp->end_score = 0;
+        $temp->end_rank = 0;
+        send('ok', $temp);
+    }
+    else send_error(sxerror::server_maintenance);
 }
 $db->close();
 

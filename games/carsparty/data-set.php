@@ -16,7 +16,7 @@ $userdata = get_post_json();
 $userdata->private_data = addslashes($userdata->private_data);
 $userdata->public_data = addslashes($userdata->public_data);
 
-$strquery = "";
+$strquery = '';
 if (!empty($userdata->private_data) && !empty($userdata->public_data))
 {
     $strquery .= "INSERT INTO profile_data (profile_id, private_data, public_data) VALUES ('$token->profile_id','$userdata->private_data','$userdata->public_data') ".
@@ -34,7 +34,7 @@ else if (!empty($userdata->public_data))
 }
 
 if (queue_add($strquery))
-    send("ok", null);
+    send('ok', null);
 else
     send_error(sxerror::server_maintenance);
 ?>

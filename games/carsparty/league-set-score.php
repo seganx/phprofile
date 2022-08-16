@@ -34,7 +34,7 @@ if ($league == null || $league->max_value < $userdata->value)
 }
 
 $finalscore = intval($league->base_score + $userdata->value);
-if (queue_add("INSERT INTO league (profile_id, league_id, score) VALUES ('$token->profile_id','$userdata->id', '$finalscore') ON DUPLICATE KEY UPDATE score=$finalscore;"))
+if (queue_add("UPDATE league SET score=$finalscore WHERE profile_id=$token->profile_id AND league_id=$userdata->id;"))
 {
     send('ok', $finalscore);
 }
