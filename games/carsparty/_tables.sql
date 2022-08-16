@@ -18,17 +18,13 @@ CREATE TABLE `profile_data` (
 ) ENGINE=InnoDB;
 
 
-DROP TABLE IF EXISTS `league`;
-CREATE TABLE `league` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `profile_id` int(10) unsigned NOT NULL,
-  `league_id` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `league_name`;
+CREATE TABLE `league_name` (
+  `profile_id` int(10) unsigned NOT NULL PRIMARY KEY,
   `score` int(10) DEFAULT 0,
   `rank` int(10) DEFAULT 0,
   `end_score` int(10) DEFAULT 0,
-  `end_rank` int(10) DEFAULT 0,
-  INDEX (`profile_id`),
-  INDEX (`league_id`)
+  `end_rank` int(10) DEFAULT 0
 ) ENGINE=InnoDB;
 
 

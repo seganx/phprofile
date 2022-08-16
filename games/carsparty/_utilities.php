@@ -18,15 +18,14 @@ function get_post_json()
     return json_decode(get_post_data());
 }
 
-function clamp($current, $min, $max)
+function clamp(int $current, int $min, int $max): int
 {
     return max($min, min($max, $current));
 }
 
-function hash_base($number, $frombase, $tobase)
+function hash_base(mixed $number, int $frombase, int $tobase): string
 {
     $res = base_convert($number, $frombase, $tobase);
-    //$res = base64_encode($number);
     $res = str_replace('+', '', $res);
     $res = str_replace('=', '', $res);
     $res = str_replace('/', '', $res);
@@ -80,7 +79,7 @@ function get_token(): mixed
 
 function queue_add(string $msg): bool
 {
-    return file_put_contents(dirname(__FILE__) . '/queue/' . time() . '.txt', $msg, FILE_APPEND | LOCK_EX);
+    return file_put_contents(dirname(__FILE__) . '/queue/' . time() . '.txt', $msg . ';', FILE_APPEND | LOCK_EX);
 }
 
 function id_to_username(int $id) : string

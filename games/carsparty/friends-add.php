@@ -44,7 +44,7 @@ $rowid = 0;
 $db->query("SELECT id FROM friends WHERE profile_id=$token->profile_id && friend_id=$friend_id");
 if ($db->no_result())
 {
-    queue_add("INSERT INTO friends (profile_id, friend_id) VALUES ($friend_id, $token->profile_id);");
+    queue_add("INSERT INTO friends (profile_id, friend_id) VALUES ($friend_id, $token->profile_id)");
     $db->query("INSERT INTO friends (profile_id, friend_id) VALUES ($token->profile_id, $friend_id)");
     $rowid = $db->insert_id();
 }

@@ -10,15 +10,16 @@ $token = get_token();
 if ($token == null)
 {
     send_error(sxerror::invalid_token);
-    exit();	
+    exit();
 }
 
 // validate user data
 $userdata = get_post_json();
-$userdata->id = intval($userdata->id);
+$userdata->name = addslashes($userdata->name);
 $userdata->score = intval($userdata->score);
 $userdata->value = intval($userdata->value);
-$hash = md5('seganx_' . $userdata->score . '!&!' . $userdata->value . '#(' . $userdata->id);
+
+$hash = md5('seganx_' . $userdata->score . '!&!' . $userdata->value . '#(' . $userdata->name);
 if ($userdata->hash !== $hash)
 {
     send_error(sxerror::invalid_params);
@@ -26,7 +27,7 @@ if ($userdata->hash !== $hash)
 }
 
 // validate league id
-$league = league::get_all_leagues()[$userdata->id];
+$league = league::get_all_leagues()[$userdata->name];
 if ($league == null || $league->max_value < $userdata->value)
 {
     send_error(sxerror::invalid_params);
@@ -34,7 +35,7 @@ if ($league == null || $league->max_value < $userdata->value)
 }
 
 $finalscore = intval($league->base_score + $userdata->value);
-if (queue_add("UPDATE league SET score=$finalscore WHERE profile_id=$token->profile_id AND league_id=$userdata->id;"))
+if (queue_add("UPDATE league_{$userdata->name} SET score='$finalscore' WHERE profile_id='$token->profile_id'"))
 {
     send('ok', $finalscore);
 }

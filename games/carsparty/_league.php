@@ -5,17 +5,17 @@ class league
     public const mode_weekly = 'weekly';
     public const mode_monthly = 'monthly';
 
-    public $id = 0;
+    public $name = '';
+    public $mode = '';
     public $base_score = 1000;
     public $max_value = 30;
-    public $mode = '';
 
-    function __construct ($id, $base_score, $max_value, $mode)
+    function __construct ($name, $mode, $base_score, $max_value)
     {
-        $this->id = $id;
+        $this->name = $name;
+        $this->mode = $mode;
         $this->base_score = $base_score;
         $this->max_value = $max_value;
-        $this->mode = $mode;
     }
 
     public function days_left(): int
@@ -43,10 +43,7 @@ class league
     {
         $res = array();
 
-        $res[1] = new league(1, 0, 15, league::mode_weekly);
-        $res[2] = new league(2, 0, 15, league::mode_weekly);
-        $res[3] = new league(3, 0, 15, league::mode_weekly);
-        $res[4] = new league(4, 0, 15, league::mode_weekly);
+        $res['total'] = new league('total', league::mode_weekly, 0, 15);
 
         return $res;
     }

@@ -33,11 +33,12 @@ if ($db->no_result())
     $username = id_to_username($tokenobj->profile_id);
     $password = hash_base(rand(1000000000, 4000000000), 10, 32);
     $db->query("UPDATE profile SET username='$username', password='$password' WHERE id=$tokenobj->profile_id");
+
+    queue_add("INSERT INTO profile_data (profile_id) VALUES ('$tokenobj->profile_id')");
 }
 else
 {
-    $prof = $db->result->fetch_assoc();
-    $tokenobj->profile_id = $prof['id'];
+    $tokenobj->profile_id = $db->result->fetch_assoc()['id'];
 }
 $db->close();
 

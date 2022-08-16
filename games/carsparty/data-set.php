@@ -19,21 +19,18 @@ $userdata->public_data = addslashes($userdata->public_data);
 $strquery = '';
 if (!empty($userdata->private_data) && !empty($userdata->public_data))
 {
-    $strquery .= "INSERT INTO profile_data (profile_id, private_data, public_data) VALUES ('$token->profile_id','$userdata->private_data','$userdata->public_data') ".
-    "ON DUPLICATE KEY UPDATE private_data='$userdata->private_data', public_data='$userdata->public_data';";
+    $strquery = "UPDATE profile_data SET private_data='$userdata->private_data', public_data='$userdata->public_data' WHERE profile_id='$token->profile_id'";
 }
 else if (!empty($userdata->private_data))
 {
-    $strquery .= "INSERT INTO profile_data (profile_id, private_data) VALUES ('$token->profile_id','$userdata->private_data') ".
-    "ON DUPLICATE KEY UPDATE private_data='$userdata->private_data';";
+    $strquery = "UPDATE profile_data SET private_data='$userdata->private_data' WHERE profile_id='$token->profile_id'";
 }
 else if (!empty($userdata->public_data))
 {
-    $strquery.= "INSERT INTO profile_data (profile_id, public_data) VALUES ('$token->profile_id','$userdata->public_data') ".
-    "ON DUPLICATE KEY UPDATE public_data='$userdata->public_data';";
+    $strquery = "UPDATE profile_data SET public_data='$userdata->public_data' WHERE profile_id='$token->profile_id'";
 }
 
-if (queue_add($strquery))
+if (!empty($strquery) && queue_add($strquery))
     send('ok', null);
 else
     send_error(sxerror::server_maintenance);
