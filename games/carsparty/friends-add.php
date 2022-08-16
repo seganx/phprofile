@@ -54,6 +54,6 @@ $db->query("SELECT f.id, p.username, p.nickname, p.status, p.avatar, s.level, f.
 $row = $db->result->fetch_assoc();
 $db->close();
 
-send("ok", $row);
+send('ok', $row);
 
 ?>

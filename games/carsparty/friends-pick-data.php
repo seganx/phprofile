@@ -25,6 +25,6 @@ $db->query("SELECT data FROM friends WHERE id=$userdata->id");
 $res = $db->result->fetch_assoc()['data'];
 $db->close();
 
-send("ok", $res);
+send('ok', $res);
 
 ?>

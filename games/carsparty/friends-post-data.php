@@ -23,7 +23,7 @@ if (empty($userdata->username))
 $friend_id = username_to_id($userdata->username);
 
 if (queue_add("UPDATE friends SET data='$userdata->data' WHERE (profile_id=$friend_id AND friend_id=$token->profile_id)"))
-    send("ok", null);
+    send('ok', null);
 else
     send_error(sxerror::invalid_params);
 

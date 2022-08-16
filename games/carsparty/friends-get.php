@@ -28,6 +28,6 @@ while($r = $db->result->fetch_assoc())
 }
 $db->close();
 
-send("ok", $rows);
+send('ok', $rows);
 
 ?>
