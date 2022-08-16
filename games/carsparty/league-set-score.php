@@ -34,7 +34,7 @@ if ($league == null || $league->max_value < $userdata->value)
     exit();
 }
 
-$finalscore = intval($league->base_score + $userdata->value);
+$finalscore = intval($userdata->score + $userdata->value);
 if (queue_add("UPDATE league_{$userdata->name} SET score='{$finalscore}' WHERE profile_id='{$token->profile_id}'"))
 {
     send('ok', $finalscore);
