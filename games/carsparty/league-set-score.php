@@ -19,7 +19,7 @@ $userdata->name = addslashes($userdata->name);
 $userdata->score = intval($userdata->score);
 $userdata->value = intval($userdata->value);
 
-$hash = md5('seganx_' . $userdata->score . '!&!' . $userdata->value . '#(' . $userdata->name);
+$hash = md5('seganx_' . $userdata->score . '!&!' . $userdata->value . '#(' . $userdata->name . configs::hash_salt);
 if ($userdata->hash !== $hash)
 {
     send_error(sxerror::invalid_params);
