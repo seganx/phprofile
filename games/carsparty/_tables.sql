@@ -20,6 +20,7 @@ CREATE TABLE `profile_data` (
 
 DROP TABLE IF EXISTS `league`;
 CREATE TABLE `league` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `profile_id` int(10) unsigned NOT NULL,
   `league_id` int(10) unsigned NOT NULL,
   `score` int(10) DEFAULT 0,
