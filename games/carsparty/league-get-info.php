@@ -31,22 +31,27 @@ if ($db == null)
     exit();
 }
 
+$result = new stdClass();
 $db->query("SELECT score, rank, end_score, end_rank FROM league_{$userdata->name} WHERE profile_id=$token->profile_id");
 if ($db->has_result())
 {
-    send('ok', $db->result->fetch_assoc());
+    $row = $db->result->fetch_assoc();
+    $result->score = intval($row['score']);
+    $result->rank = intval($row['rank']);
+    $result->end_score = intval($row['end_score']);
+    $result->end_rank = intval($row['end_rank']);
+    send('ok', $result);
 }
 else
 {
-    $temp = new stdClass();
-    $temp->score = $league->base_score;
-    $temp->rank = rand(100000, 400000);
-    $temp->end_score = 0;
-    $temp->end_rank = 0;
+    $result->score = $league->base_score;
+    $result->rank = rand(100000, 400000);
+    $result->end_score = 0;
+    $result->end_rank = 0;
 
-    if (queue_add("INSERT INTO league_{$userdata->name} (profile_id, score, rank) VALUES ('$token->profile_id', '$temp->score', '$temp->rank')"))
+    if (queue_add("INSERT INTO league_{$userdata->name} (profile_id, score, rank) VALUES ('$token->profile_id', '$result->score', '$result->rank')"))
     {
-        send('ok', $temp);
+        send('ok', $result);
     }
     else send_error(sxerror::server_maintenance);
 }
