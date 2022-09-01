@@ -3,7 +3,7 @@
 require '_configs.php';
 require '_database.php';
 
-function dequeue()
+function dequeue($db)
 {
     $queries = "";
 
@@ -23,22 +23,19 @@ function dequeue()
     }
 
     // verify query loaded
-    if (empty($queries) == false)
+    if ($db != null && empty($queries) == false)
     {
-        $db = database::connect();
-        if ($db != null)
-        {
-            $db->multi_query($queries);
-            $db->close();
-        }
+        $db->multi_query($queries);
     }
 }
 
+$db = database::connect();
 for ($i=0; $i < 60; $i++)
 {
+    dequeue($db);
     sleep(1);
-    dequeue();
 }
+$db->close();
 
 
 ?>
