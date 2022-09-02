@@ -27,7 +27,7 @@ else if (!empty($userdata->private_data))
 }
 else if (!empty($userdata->public_data))
 {
-    $strquery = "UPDATE profile_data SET public_data='{$userdata->public_data}' WHERE profile_id='{$token->profile_id}'";
+    $strquery = "UPDATE profile_data SET public_data='{$userdata->public_data}' WHERE profile_id='{$token->profile_id}' AND device_id='{$token->device_id}'";
 }
 
 if (!empty($strquery) && queue_add($strquery))
