@@ -19,11 +19,11 @@ $userdata->public_data = addslashes($userdata->public_data);
 $strquery = '';
 if (!empty($userdata->private_data) && !empty($userdata->public_data))
 {
-    $strquery = "UPDATE profile_data SET private_data='{$userdata->private_data}', public_data='{$userdata->public_data}' WHERE profile_id='{$token->profile_id}'";
+    $strquery = "UPDATE profile_data SET private_data='{$userdata->private_data}', public_data='{$userdata->public_data}' WHERE profile_id='{$token->profile_id}' AND device_id='{$token->device_id}'";
 }
 else if (!empty($userdata->private_data))
 {
-    $strquery = "UPDATE profile_data SET private_data='{$userdata->private_data}' WHERE profile_id='{$token->profile_id}'";
+    $strquery = "UPDATE profile_data SET private_data='{$userdata->private_data}' WHERE profile_id='{$token->profile_id}' AND device_id='{$token->device_id}'";
 }
 else if (!empty($userdata->public_data))
 {

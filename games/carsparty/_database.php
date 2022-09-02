@@ -52,6 +52,11 @@ class database
         return $this->conn->insert_id;
     }
 
+    public function affected_rows()
+    {
+        return $this->conn->affected_rows;
+    }
+
     private function close_result()
     {
         if ($this->result == null) return;

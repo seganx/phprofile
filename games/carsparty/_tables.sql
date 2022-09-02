@@ -13,18 +13,22 @@ CREATE TABLE `profile` (
 DROP TABLE IF EXISTS `profile_data`;
 CREATE TABLE `profile_data` (
   `profile_id` int(10) unsigned NOT NULL PRIMARY KEY,
+  `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
   `private_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
   `public_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
+  INDEX (`device_id`)
 ) ENGINE=InnoDB;
 
 
 DROP TABLE IF EXISTS `league_name`;
 CREATE TABLE `league_name` (
   `profile_id` int(10) unsigned NOT NULL PRIMARY KEY,
+  `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
   `score` int(10) DEFAULT 0,
   `rank` int(10) DEFAULT 0,
   `end_score` int(10) DEFAULT 0,
-  `end_rank` int(10) DEFAULT 0
+  `end_rank` int(10) DEFAULT 0,
+  INDEX (`device_id`)
 ) ENGINE=InnoDB;
 
 
@@ -32,9 +36,11 @@ DROP TABLE IF EXISTS `friends`;
 CREATE TABLE `friends` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `profile_id` int(10) unsigned NOT NULL,
+  `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
   `friend_id` int(10) unsigned NOT NULL,
   INDEX (`profile_id`),
-  INDEX (`friend_id`)
+  INDEX (`friend_id`),
+  INDEX (`device_id`)
 ) ENGINE=InnoDB;
 
 

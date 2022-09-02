@@ -24,7 +24,7 @@ if ($league == null)
 }
 
 // validate current score value with database
-if (queue_add("UPDATE league_{$userdata->name} SET end_score=0, end_rank=0 WHERE profile_id={$token->profile_id}"))
+if (queue_add("UPDATE league_{$userdata->name} SET end_score=0, end_rank=0 WHERE profile_id='{$token->profile_id}' AND device_id='{$token->device_id}'"))
     send('ok', null);
 else
     send_error(sxerror::server_maintenance);

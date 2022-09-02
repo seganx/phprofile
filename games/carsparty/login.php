@@ -34,7 +34,7 @@ if ($db->no_result())
     $password = hash_base(rand(1000000000, 4000000000), 10, 32);
     $db->query("UPDATE profile SET username='{$username}', password='{$password}' WHERE id={$tokenobj->profile_id}");
 
-    queue_add("INSERT INTO profile_data (profile_id) VALUES ('{$tokenobj->profile_id}')");
+    queue_add("INSERT INTO profile_data (profile_id, device_id) VALUES ('{$tokenobj->profile_id}', '{$tokenobj->device_id}')");
 }
 else
 {
