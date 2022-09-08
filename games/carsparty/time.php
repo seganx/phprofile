@@ -4,7 +4,7 @@ header('Cache-Control: no-cache');
 header('Content-type: application/json');
 
 $time = time();
-$totalDays = (int)round($time / 86400) - 93;
+$totalDays = (int)ceil($time / 86400) - 93;
 $ydays = $totalDays % 365;
 $mdays = ($ydays < 187) ? ($ydays % 31) : ($ydays - 186) % 30;
 $wdays = (($ydays + 2) % 7);
