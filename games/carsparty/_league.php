@@ -20,15 +20,19 @@ class league
 
     public function days_left(): int
     {
-	    $time = time();
-        $totalDays = (int)round($time / 86400) - 91;
-        $days = $totalDays % 365;
-	    $day = ($days < 190) ? ($days % 31) : ($days - 186) % 30;
+        $time = time();
+        $totalDays = (int)round($time / 86400) - 93;
+        $ydays = $totalDays % 365;
+        $mdays = ($ydays < 187) ? ($ydays % 31) : ($ydays - 186) % 30;
+        $wdays = (($ydays + 2) % 7);
+
+        $r_mdays = ($ydays < 187) ? (30 - $mdays) : (29 - $mdays);
+        $r_wdays = 6 - $wdays;
 
         switch ($this->mode)
         {
-            case self::mode_weekly: return (($days + 1) % 7);
-            case self::mode_monthly: return $day;
+            case self::mode_weekly: return $r_wdays;
+            case self::mode_monthly: return $r_mdays;
         }
 
         return 0;
