@@ -18,31 +18,6 @@ class league
         $this->max_value = $max_value;
     }
 
-    public function days_left(): int
-    {
-        $time = time();
-        $totalDays = (int)ceil($time / 86400) - 93;
-        $ydays = $totalDays % 365;
-        $mdays = ($ydays < 187) ? ($ydays % 31) : ($ydays - 186) % 30;
-        $wdays = (($ydays + 2) % 7);
-
-        $r_mdays = ($ydays < 187) ? (30 - $mdays) : (29 - $mdays);
-        $r_wdays = 6 - $wdays;
-
-        switch ($this->mode)
-        {
-            case self::mode_weekly: return $r_wdays;
-            case self::mode_monthly: return $r_mdays;
-        }
-
-        return 0;
-    }
-
-	public function is_ended(): bool
-    {
-	    return $this->days_left() == 0;
-    }
-
     public static function get_all_leagues()
     {
         $res = array();
