@@ -1,14 +1,19 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require '_configs.php';
 require '_league.php';
 require '_database.php';
 require '_time.php';
 
-
 $db = database::connect();
 if ($db == null)
+{
     exit();
+}
 
 $all = league::get_all_leagues();
 
@@ -58,6 +63,8 @@ foreach ($all as $key => $item)
         file_put_contents(dirname(__FILE__) . '/cache/leaderboard_' . $item->name . '_last_3.txt', json_encode($rows), FILE_TEXT | LOCK_EX);
 
         $db->multi_query("UPDATE league_{$item->name} SET end_score=score, end_rank=rank;UPDATE league_{$item->name} SET rank=0, score={$item->base_score};");
+
+        echo "league_{$item->name} updated: {$db->affected_rows()} rows affected!\n";
     }
 }
 

@@ -4,7 +4,7 @@ class calendar
 {
     public const offset = 7932601;
 
-    public static function get_now() : mixed
+    public static function get_now()
     {
         $time = time() - calendar::offset;
 
