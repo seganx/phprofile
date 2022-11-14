@@ -22,6 +22,12 @@ if (!isset($userdata->username))
 $userdata->username = addslashes($userdata->username);
 $owner_id = username_to_id($userdata->username);
 
+if($token->profile_id == $owner_id)
+{
+    send_error(sxerror::invalid_params);
+    exit();
+}
+
 $strquery = '';
 foreach ($userdata->changes as $item)
 {

@@ -31,6 +31,21 @@ CREATE TABLE `league_total` (
   INDEX (`device_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS `assets`;
+CREATE TABLE `assets` (
+  `profile_id` int unsigned NOT NULL PRIMARY KEY,
+  `data` JSON NOT NULL
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS `likes`;
+CREATE TABLE `likes` (
+  `id` varchar(32) CHARACTER SET ascii NOT NULL PRIMARY KEY,
+  `profile_id` int unsigned NOT NULL,
+  `owner_id` int unsigned NOT NULL,
+  `data` JSON NOT NULL
+) ENGINE=InnoDB;
+
+
 
 DROP TABLE IF EXISTS `friends`;
 CREATE TABLE `friends` (
@@ -41,29 +56,6 @@ CREATE TABLE `friends` (
   INDEX (`profile_id`),
   INDEX (`friend_id`),
   INDEX (`device_id`)
-) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS `assets`;
-CREATE TABLE `assets` (
-  `id` varchar(32) NOT NULL PRIMARY KEY,
-  `profile_id` int unsigned NOT NULL,
-  `asset_id` int unsigned NOT NULL,
-  `views` int unsigned NOT NULL,
-  `likes` int NOT NULL,
-  INDEX (`profile_id`),
-  INDEX (`asset_id`)
-) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS `likes`;
-CREATE TABLE `likes` (
-  `id` varchar(32) NOT NULL PRIMARY KEY,
-  `profile_id` int unsigned NOT NULL,
-  `owner_id` int unsigned NOT NULL,
-  `asset_id` int unsigned NOT NULL,
-  `liked` tinyint unsigned NOT NULL,
-  INDEX (`profile_id`),
-  INDEX (`owner_id`),
-  INDEX (`asset_id`)
 ) ENGINE=InnoDB;
 
 

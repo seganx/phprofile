@@ -34,7 +34,7 @@ $result = new stdclass();
 $db->query("SELECT public_data FROM profile_data WHERE profile_id={$owner_id}");
 if ($db->has_result())
 {
-    $result->public_data = $db->result->fetch_assoc()['public_data'];
+    $result->data = $db->result->fetch_assoc()['public_data'];
 }
 else
 {
@@ -46,10 +46,10 @@ else
 $db->query("SELECT assets.asset_id, assets.views, assets.likes, likes.liked FROM assets LEFT JOIN likes ON likes.profile_id={$token->profile_id} AND likes.owner_id={$owner_id} AND likes.asset_id=assets.asset_id WHERE assets.profile_id={$owner_id};");
 if ($db->has_result())
 {
-    $result->social = [];
+    $result->assets = [];
     while($r = $db->result->fetch_assoc())
     {
-        $result->social[] = $r;
+        $result->assets[] = $r;
     }
 }
 
