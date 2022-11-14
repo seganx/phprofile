@@ -1,0 +1,1403 @@
+﻿{
+	"forceUpdate": {
+		"whole": true,
+		"shop": true,
+		"league": true
+	},
+	"server": {
+		"address": "http://45.156.185.174/webapi/",
+		"requestTimeout": 20,
+		"getTopPlayersCount": 100,
+		"debug": false
+	},
+	"photon": {
+		"address": "",
+		"name": "rc",
+		"version": "29"
+	},
+	"matchMaking": {
+		"joinTimeouts": [
+			25,
+			25,
+			28,
+			30,
+			35,
+			40
+		],
+		"eloScoreCount": 8,
+		"eloScoreParams": [
+			{
+				"x": 0.75,
+				"y": -750.0
+			},
+			{
+				"x": 0.800000011920929,
+				"y": -800.0
+			},
+			{
+				"x": 0.8500000238418579,
+				"y": -850.0
+			},
+			{
+				"x": 0.8999999761581421,
+				"y": -900.0
+			},
+			{
+				"x": 0.949999988079071,
+				"y": -950.0
+			},
+			{
+				"x": 1.0,
+				"y": 0.0
+			}
+		],
+		"eloPowerParams": {
+			"x": 0.0,
+			"y": 2000.0
+		},
+		"eloGroupParams": {
+			"x": 0.0,
+			"y": 0.0
+		},
+		"eloSqlLobby": "C0 = \"{0}\" AND C1 >= {1} AND C1 <= {2} AND C2 >= {3} AND C2 <= {4} AND C3 >= {5} AND C3 <= {6}"
+	},
+	"socials": {
+		"storeUrl": "https://cafebazaar.ir/app/com.parsehgames.shetabonline",
+		"rateUrl": "bazaar://details?id=com.parsehgames.shetabonline",
+		"instagramUrl": "instagram://user?username=race.game",
+		"telegramUrl": "tg://resolve?domain=race_game",
+		"contactSurveyUrl": "https://docs.google.com/forms/d/e/1FAIpQLScMpv3Ry8A2naHlIKBS2pwelGLmVkAZBqPJ7Ek1G5QNMcnlIw/viewform?usp=sf_link",
+		"contactTelegramUrl": "tg://resolve?domain=racegame",
+		"contactEmailUrl": "info@seganx.com"
+	},
+	"recharg": {
+		"count": 10,
+		"time": 600
+	},
+	"rentCar": {
+		"racerInterval": 5,
+		"scoreOffset": {
+			"x": 0,
+			"y": 0
+		}
+	},
+	"race": {
+		"maxTime": 55.0,
+		"startSpeed": 30.0,
+		"startRacerDistance": 1.399999976158142,
+		"startNosFactor": 0.15000000596046449,
+		"nosTrafficMinDistance": 1.5,
+		"nosTrafficMaxDistance": 2.5,
+		"nosTrafficFactor": 0.03999999910593033,
+		"nosTimeFactor": 0.019999999552965165,
+		"nosBonusWidth": 40,
+		"nosBonusChance": 100,
+		"hudFadeDistance": {
+			"x": 1,
+			"y": 25
+		},
+		"cameraOffsets": [
+			0.0,
+			0.15000000596046449,
+			0.25,
+			0.3499999940395355
+		],
+		"positionScore": [
+			10,
+			5,
+			3,
+			-1
+		],
+		"groupMaxSpeed": [
+			0.0,
+			60.0,
+			65.0,
+			70.0,
+			75.0,
+			80.0
+		],
+		"bots": {
+			"rayDistance": 0.0,
+			"raySpeedFactor": 0.5,
+			"crashChance": 0,
+			"canVirajChance": 30,
+			"doVirajChance": 30,
+			"chatLeaveChance": 40,
+			"chatChance": 50,
+			"powerRange": {
+				"x": -150,
+				"y": 200
+			},
+			"powers": [
+				{
+					"x": 1.0,
+					"y": -300.0
+				},
+				{
+					"x": 3.6549999713897707,
+					"y": -2789.0
+				},
+				{
+					"x": 2.4365999698638918,
+					"y": -1254.0
+				},
+				{
+					"x": 1.462499976158142,
+					"y": 280.0
+				},
+				{
+					"x": 1.4600000381469727,
+					"y": 358.0
+				},
+				{
+					"x": 0.2800000011920929,
+					"y": 3262.0
+				}
+			]
+		},
+		"traffics": {
+			"carsSpeed": 20.0,
+			"startDistance": 256.0,
+			"baseDistance": 10.0,
+			"distanceRatio": 1.0,
+			"distanceVariance": 2.0,
+			"roadWidthFactor": 0.550000011920929,
+			"positionVariance": 1.0,
+			"doubleCarChance": 0
+		},
+		"obstacle": {
+			"startDistance": 256.0,
+			"baseDistance": -10.0,
+			"distanceRatio": -10.0,
+			"distanceVariance": 0.0,
+			"roadWidthFactor": 0.550000011920929,
+			"positionVariance": 0.5
+		},
+		"rewardsOnline": [
+			{
+				"gems": 3,
+				"coins": 4000,
+				"gemChance": 100,
+				"racerCardChance": 40,
+				"customeChance": 40,
+				"cardLootFactor": 100
+			},
+			{
+				"gems": 2,
+				"coins": 2500,
+				"gemChance": 100,
+				"racerCardChance": 35,
+				"customeChance": 30,
+				"cardLootFactor": 80
+			},
+			{
+				"gems": 1,
+				"coins": 1500,
+				"gemChance": 100,
+				"racerCardChance": 30,
+				"customeChance": 0,
+				"cardLootFactor": 60
+			},
+			{
+				"gems": 0,
+				"coins": 1000,
+				"gemChance": 100,
+				"racerCardChance": 25,
+				"customeChance": 0,
+				"cardLootFactor": 40
+			}
+		],
+		"rewardsOffline": [
+			{
+				"gems": 3,
+				"coins": 400,
+				"gemChance": 50,
+				"racerCardChance": 10,
+				"customeChance": 15,
+				"cardLootFactor": 0
+			},
+			{
+				"gems": 2,
+				"coins": 300,
+				"gemChance": 50,
+				"racerCardChance": 0,
+				"customeChance": 10,
+				"cardLootFactor": 0
+			},
+			{
+				"gems": 1,
+				"coins": 200,
+				"gemChance": 50,
+				"racerCardChance": 0,
+				"customeChance": 0,
+				"cardLootFactor": 0
+			},
+			{
+				"gems": 100,
+				"coins": 50,
+				"gemChance": 50,
+				"racerCardChance": 0,
+				"customeChance": 0,
+				"cardLootFactor": 0
+			}
+		]
+	},
+	"leagues": [
+		{
+			"startScore": 1000,
+			"startRank": 0,
+			"startGroup": 1,
+			"rewardGem": 50,
+			"rewardCoin": 5000,
+			"rewardCards": 3,
+			"cardsGroups": {
+				"x": 1,
+				"y": 1
+			},
+			"lootboxRacerIds": {
+				"x": 115,
+				"y": 115,
+				"z": 120
+			},
+			"lootboxValue": 8,
+			"raceRewardRacerParam": {
+				"x": 0,
+				"y": 2
+			}
+		},
+		{
+			"startScore": 1200,
+			"startRank": 0,
+			"startGroup": 2,
+			"rewardGem": 100,
+			"rewardCoin": 8000,
+			"rewardCards": 5,
+			"cardsGroups": {
+				"x": 2,
+				"y": 2
+			},
+			"lootboxRacerIds": {
+				"x": 320,
+				"y": 320,
+				"z": 330
+			},
+			"lootboxValue": 7,
+			"raceRewardRacerParam": {
+				"x": -8,
+				"y": 12
+			}
+		},
+		{
+			"startScore": 1500,
+			"startRank": 0,
+			"startGroup": 3,
+			"rewardGem": 200,
+			"rewardCoin": 15000,
+			"rewardCards": 8,
+			"cardsGroups": {
+				"x": 3,
+				"y": 3
+			},
+			"lootboxRacerIds": {
+				"x": 460,
+				"y": 470,
+				"z": 480
+			},
+			"lootboxValue": 6,
+			"raceRewardRacerParam": {
+				"x": -15,
+				"y": 20
+			}
+		},
+		{
+			"startScore": 1900,
+			"startRank": 0,
+			"startGroup": 4,
+			"rewardGem": 300,
+			"rewardCoin": 25000,
+			"rewardCards": 12,
+			"cardsGroups": {
+				"x": 4,
+				"y": 4
+			},
+			"lootboxRacerIds": {
+				"x": 540,
+				"y": 540,
+				"z": 610
+			},
+			"lootboxValue": 5,
+			"raceRewardRacerParam": {
+				"x": -20,
+				"y": 25
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 0,
+			"startGroup": 5,
+			"rewardGem": 500,
+			"rewardCoin": 40000,
+			"rewardCards": 14,
+			"cardsGroups": {
+				"x": 5,
+				"y": 5
+			},
+			"lootboxRacerIds": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"lootboxValue": 3,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 100,
+			"startGroup": 5,
+			"rewardGem": 550,
+			"rewardCoin": 70000,
+			"rewardCards": 15,
+			"cardsGroups": {
+				"x": 5,
+				"y": 20
+			},
+			"lootboxRacerIds": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"lootboxValue": 2,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 50,
+			"startGroup": 5,
+			"rewardGem": 600,
+			"rewardCoin": 80000,
+			"rewardCards": 16,
+			"cardsGroups": {
+				"x": 5,
+				"y": 20
+			},
+			"lootboxRacerIds": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"lootboxValue": 2,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 20,
+			"startGroup": 5,
+			"rewardGem": 650,
+			"rewardCoin": 90000,
+			"rewardCards": 17,
+			"cardsGroups": {
+				"x": 5,
+				"y": 20
+			},
+			"lootboxRacerIds": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"lootboxValue": 2,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 10,
+			"startGroup": 5,
+			"rewardGem": 700,
+			"rewardCoin": 100000,
+			"rewardCards": 18,
+			"cardsGroups": {
+				"x": 5,
+				"y": 20
+			},
+			"lootboxRacerIds": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"lootboxValue": 2,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 3,
+			"startGroup": 5,
+			"rewardGem": 750,
+			"rewardCoin": 140000,
+			"rewardCards": 19,
+			"cardsGroups": {
+				"x": 5,
+				"y": 20
+			},
+			"lootboxRacerIds": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"lootboxValue": 2,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		},
+		{
+			"startScore": 2400,
+			"startRank": 1,
+			"startGroup": 5,
+			"rewardGem": 1000,
+			"rewardCoin": 200000,
+			"rewardCards": 20,
+			"cardsGroups": {
+				"x": 5,
+				"y": 20
+			},
+			"lootboxRacerIds": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"lootboxValue": 2,
+			"raceRewardRacerParam": {
+				"x": -25,
+				"y": 30
+			}
+		}
+	],
+	"shop": [
+		{
+			"gemToTime": 200,
+			"gemToCoin": 400,
+			"instaToGem": 30,
+			"nicknamePrice": 50,
+			"inventorySellFactor": 0.014999999664723874,
+			"leagueSpecialPackagesNextTime": 172800,
+			"blackMarket": {
+				"refreshTime": 21600,
+				"refreshPrices": [
+					200,
+					80,
+					20
+				],
+				"packages": [
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					},
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					},
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					},
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					}
+				],
+				"interestedSearch": {
+					"minCandidateCount": 4,
+					"minReqCards": [
+						90,
+						90,
+						90,
+						10,
+						10,
+						20,
+						20
+					]
+				},
+				"suggestionSearch": {
+					"bestRacerIds": [
+						115,
+						160,
+						310,
+						340,
+						350,
+						370,
+						440,
+						490,
+						515,
+						530,
+						535,
+						545
+					],
+					"maxReqCards": [
+						90,
+						90,
+						90,
+						10,
+						10,
+						20,
+						20
+					]
+				}
+			},
+			"loadingBoxPackage": [
+				{
+					"gemPrice": 20,
+					"nextTime": 600,
+					"dailyCount": 5,
+					"cardChance": 60,
+					"gemValues": [
+						5,
+						10,
+						15,
+						40
+					],
+					"coinValues": [
+						1000,
+						4000,
+						8000,
+						20000
+					],
+					"cardsGroups": {
+						"x": 1,
+						"y": 2
+					}
+				},
+				{
+					"gemPrice": 100,
+					"nextTime": 86400,
+					"dailyCount": 5,
+					"cardChance": 60,
+					"gemValues": [
+						40,
+						50,
+						60,
+						120
+					],
+					"coinValues": [
+						10000,
+						20000,
+						40000,
+						100000
+					],
+					"cardsGroups": {
+						"x": 3,
+						"y": 4
+					}
+				}
+			],
+			"combinedPackages": [
+				{
+					"coin": 60000,
+					"coinDiscount": 0,
+					"coinBackgroundIndex": 3,
+					"customes": 25,
+					"racers": 4,
+					"racersCenter": 11,
+					"racersRaduis": 11,
+					"price": 150
+				},
+				{
+					"coin": 140000,
+					"coinDiscount": 16,
+					"coinBackgroundIndex": 4,
+					"customes": 25,
+					"racers": 4,
+					"racersCenter": 22,
+					"racersRaduis": 11,
+					"price": 300
+				},
+				{
+					"coin": 300000,
+					"coinDiscount": 25,
+					"coinBackgroundIndex": 5,
+					"customes": 25,
+					"racers": 4,
+					"racersCenter": 33,
+					"racersRaduis": 11,
+					"price": 600
+				}
+			],
+			"leagueSpecialPackages": [
+				{
+					"sku": "racer_spec_A_1_1",
+					"price": 2000,
+					"realPrice": 6000,
+					"gem": 100,
+					"coin": 75000,
+					"customes": 30,
+					"discount": 65,
+					"racerIds": {
+						"x": 60,
+						"y": 70,
+						"z": 80
+					}
+				},
+				{
+					"sku": "racer_spec_A_1_2",
+					"price": 3900,
+					"realPrice": 10000,
+					"gem": 120,
+					"coin": 100000,
+					"customes": 40,
+					"discount": 60,
+					"racerIds": {
+						"x": 90,
+						"y": 100,
+						"z": 110
+					}
+				},
+				{
+					"sku": "racer_spec_A_2_1",
+					"price": 4900,
+					"realPrice": 16000,
+					"gem": 200,
+					"coin": 300000,
+					"customes": 30,
+					"discount": 70,
+					"racerIds": {
+						"x": 130,
+						"y": 143,
+						"z": 146
+					}
+				},
+				{
+					"sku": "racer_spec_A_2_2",
+					"price": 9900,
+					"realPrice": 20000,
+					"gem": 250,
+					"coin": 250000,
+					"customes": 40,
+					"discount": 50,
+					"racerIds": {
+						"x": 150,
+						"y": 160,
+						"z": 310
+					}
+				},
+				{
+					"sku": "racer_spec_A_3_1",
+					"price": 15000,
+					"realPrice": 25000,
+					"gem": 150,
+					"coin": 450000,
+					"customes": 30,
+					"discount": 40,
+					"racerIds": {
+						"x": 340,
+						"y": 350,
+						"z": 360
+					}
+				},
+				{
+					"sku": "racer_spec_A_3_2",
+					"price": 9900,
+					"realPrice": 18000,
+					"gem": 300,
+					"coin": 450000,
+					"customes": 40,
+					"discount": 45,
+					"racerIds": {
+						"x": 370,
+						"y": 440,
+						"z": 450
+					}
+				},
+				{
+					"sku": "racer_spec_A_4_1",
+					"price": 19000,
+					"realPrice": 30000,
+					"gem": 180,
+					"coin": 350000,
+					"customes": 30,
+					"discount": 35,
+					"racerIds": {
+						"x": 505,
+						"y": 515,
+						"z": 520
+					}
+				},
+				{
+					"sku": "racer_spec_A_4_2",
+					"price": 29000,
+					"realPrice": 72000,
+					"gem": 180,
+					"coin": 300000,
+					"customes": 40,
+					"discount": 60,
+					"racerIds": {
+						"x": 525,
+						"y": 530,
+						"z": 535
+					}
+				},
+				{
+					"sku": "racer_spec_A_5_1",
+					"price": 29000,
+					"realPrice": 83000,
+					"gem": 200,
+					"coin": 300000,
+					"customes": 30,
+					"discount": 65,
+					"racerIds": {
+						"x": 545,
+						"y": 620,
+						"z": 630
+					}
+				},
+				{
+					"sku": "racer_spec_A_5_2",
+					"price": 29000,
+					"realPrice": 116000,
+					"gem": 200,
+					"coin": 400000,
+					"customes": 40,
+					"discount": 75,
+					"racerIds": {
+						"x": 640,
+						"y": 650,
+						"z": 660
+					}
+				}
+			],
+			"gemPackages": [
+				{
+					"sku": "racer_gem_A_1",
+					"price": 2000,
+					"gems": 50,
+					"discount": 0
+				},
+				{
+					"sku": "racer_gem_A_2",
+					"price": 4900,
+					"gems": 150,
+					"discount": 14
+				},
+				{
+					"sku": "racer_gem_A_3",
+					"price": 15000,
+					"gems": 450,
+					"discount": 20
+				},
+				{
+					"sku": "racer_gem_A_4",
+					"price": 49000,
+					"gems": 1600,
+					"discount": 31
+				},
+				{
+					"sku": "racer_gem_A_5",
+					"price": 99000,
+					"gems": 3700,
+					"discount": 49
+				},
+				{
+					"sku": "racer_gem_A_6",
+					"price": 199000,
+					"gems": 8000,
+					"discount": 61
+				}
+			],
+			"racerCosts": {
+				"hood": {
+					"count": 5,
+					"baseCostFactor": 0.03999999910593033,
+					"costRatio": 0.004999999888241291
+				},
+				"roof": {
+					"count": 5,
+					"baseCostFactor": 0.07000000029802323,
+					"costRatio": 0.004999999888241291
+				},
+				"spoiler": {
+					"count": 5,
+					"baseCostFactor": 0.10999999940395355,
+					"costRatio": 0.004999999888241291
+				},
+				"vinyl": {
+					"count": 5,
+					"baseCostFactor": 0.12999999523162843,
+					"costRatio": 0.004999999888241291
+				},
+				"wheel": {
+					"count": 5,
+					"baseCostFactor": 0.09000000357627869,
+					"costRatio": 0.004999999888241291
+				},
+				"bodyColorCostRatio": 0.019999999552965165,
+				"windowColorCostRatio": 0.009999999776482582,
+				"lightColorCostRatio": 0.004999999888241291,
+				"speedUpgradeCostRatio": 0.012000000104308129,
+				"nitroUpgradeCostRatio": 0.014999999664723874,
+				"steeringUpgradeCostRatio": 0.004999999888241291,
+				"bodyUpgradeCostRatio": 0.00800000037997961,
+				"upgradeCostsRatio": [
+					1.0,
+					1.6304349899291993,
+					2.6086959838867189,
+					3.9130430221557619,
+					5.65217399597168,
+					7.913043022155762,
+					11.086959838867188,
+					15.5,
+					21.717390060424806,
+					30.391300201416017,
+					42.56521987915039,
+					59.56521987915039,
+					97.82608795166016
+				]
+			}
+		},
+		{
+			"gemToTime": 200,
+			"gemToCoin": 400,
+			"instaToGem": 30,
+			"nicknamePrice": 50,
+			"inventorySellFactor": 0.014999999664723874,
+			"leagueSpecialPackagesNextTime": 172800,
+			"blackMarket": {
+				"refreshTime": 21600,
+				"refreshPrices": [
+					200,
+					80,
+					20
+				],
+				"packages": [
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					},
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					},
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					},
+					{
+						"maxCount": 5,
+						"basePriceFactor": 0.05000000074505806,
+						"priceRatio": 0.014999999664723874
+					}
+				],
+				"interestedSearch": {
+					"minCandidateCount": 4,
+					"minReqCards": [
+						90,
+						90,
+						90,
+						10,
+						10,
+						20,
+						20
+					]
+				},
+				"suggestionSearch": {
+					"bestRacerIds": [
+						115,
+						160,
+						310,
+						340,
+						350,
+						370,
+						440,
+						490,
+						515,
+						530,
+						535,
+						545
+					],
+					"maxReqCards": [
+						90,
+						90,
+						90,
+						10,
+						10,
+						20,
+						20
+					]
+				}
+			},
+			"loadingBoxPackage": [
+				{
+					"gemPrice": 20,
+					"nextTime": 600,
+					"dailyCount": 5,
+					"cardChance": 60,
+					"gemValues": [
+						5,
+						10,
+						15,
+						40
+					],
+					"coinValues": [
+						1000,
+						4000,
+						8000,
+						20000
+					],
+					"cardsGroups": {
+						"x": 1,
+						"y": 2
+					}
+				},
+				{
+					"gemPrice": 100,
+					"nextTime": 86400,
+					"dailyCount": 5,
+					"cardChance": 60,
+					"gemValues": [
+						40,
+						50,
+						60,
+						120
+					],
+					"coinValues": [
+						10000,
+						20000,
+						40000,
+						100000
+					],
+					"cardsGroups": {
+						"x": 3,
+						"y": 4
+					}
+				}
+			],
+			"combinedPackages": [
+				{
+					"coin": 60000,
+					"coinDiscount": 0,
+					"coinBackgroundIndex": 3,
+					"customes": 25,
+					"racers": 4,
+					"racersCenter": 11,
+					"racersRaduis": 11,
+					"price": 150
+				},
+				{
+					"coin": 140000,
+					"coinDiscount": 16,
+					"coinBackgroundIndex": 4,
+					"customes": 25,
+					"racers": 4,
+					"racersCenter": 22,
+					"racersRaduis": 11,
+					"price": 300
+				},
+				{
+					"coin": 300000,
+					"coinDiscount": 25,
+					"coinBackgroundIndex": 5,
+					"customes": 25,
+					"racers": 4,
+					"racersCenter": 33,
+					"racersRaduis": 11,
+					"price": 600
+				}
+			],
+			"leagueSpecialPackages": [
+				{
+					"sku": "racer_spec_A_1_1",
+					"price": 2000,
+					"realPrice": 6000,
+					"gem": 100,
+					"coin": 75000,
+					"customes": 30,
+					"discount": 65,
+					"racerIds": {
+						"x": 60,
+						"y": 70,
+						"z": 80
+					}
+				},
+				{
+					"sku": "racer_spec_A_1_2",
+					"price": 3900,
+					"realPrice": 10000,
+					"gem": 120,
+					"coin": 100000,
+					"customes": 40,
+					"discount": 60,
+					"racerIds": {
+						"x": 90,
+						"y": 100,
+						"z": 110
+					}
+				},
+				{
+					"sku": "racer_spec_A_2_1",
+					"price": 4900,
+					"realPrice": 16000,
+					"gem": 200,
+					"coin": 300000,
+					"customes": 30,
+					"discount": 70,
+					"racerIds": {
+						"x": 130,
+						"y": 143,
+						"z": 146
+					}
+				},
+				{
+					"sku": "racer_spec_A_2_2",
+					"price": 9900,
+					"realPrice": 20000,
+					"gem": 250,
+					"coin": 250000,
+					"customes": 40,
+					"discount": 50,
+					"racerIds": {
+						"x": 150,
+						"y": 160,
+						"z": 310
+					}
+				},
+				{
+					"sku": "racer_spec_A_3_1",
+					"price": 15000,
+					"realPrice": 25000,
+					"gem": 150,
+					"coin": 450000,
+					"customes": 30,
+					"discount": 40,
+					"racerIds": {
+						"x": 340,
+						"y": 350,
+						"z": 360
+					}
+				},
+				{
+					"sku": "racer_spec_A_3_2",
+					"price": 9900,
+					"realPrice": 18000,
+					"gem": 300,
+					"coin": 450000,
+					"customes": 40,
+					"discount": 45,
+					"racerIds": {
+						"x": 370,
+						"y": 440,
+						"z": 450
+					}
+				},
+				{
+					"sku": "racer_spec_A_4_1",
+					"price": 19000,
+					"realPrice": 30000,
+					"gem": 180,
+					"coin": 350000,
+					"customes": 30,
+					"discount": 35,
+					"racerIds": {
+						"x": 505,
+						"y": 515,
+						"z": 520
+					}
+				},
+				{
+					"sku": "racer_spec_A_4_2",
+					"price": 29000,
+					"realPrice": 72000,
+					"gem": 180,
+					"coin": 300000,
+					"customes": 40,
+					"discount": 60,
+					"racerIds": {
+						"x": 525,
+						"y": 530,
+						"z": 535
+					}
+				},
+				{
+					"sku": "racer_spec_A_5_1",
+					"price": 29000,
+					"realPrice": 83000,
+					"gem": 200,
+					"coin": 300000,
+					"customes": 30,
+					"discount": 65,
+					"racerIds": {
+						"x": 545,
+						"y": 620,
+						"z": 630
+					}
+				},
+				{
+					"sku": "racer_spec_A_5_2",
+					"price": 29000,
+					"realPrice": 116000,
+					"gem": 200,
+					"coin": 400000,
+					"customes": 40,
+					"discount": 75,
+					"racerIds": {
+						"x": 640,
+						"y": 650,
+						"z": 660
+					}
+				}
+			],
+			"gemPackages": [
+				{
+					"sku": "racer_gem_A_1",
+					"price": 2000,
+					"gems": 50,
+					"discount": 0
+				},
+				{
+					"sku": "racer_gem_A_2",
+					"price": 4900,
+					"gems": 150,
+					"discount": 14
+				},
+				{
+					"sku": "racer_gem_A_3",
+					"price": 15000,
+					"gems": 450,
+					"discount": 20
+				},
+				{
+					"sku": "racer_gem_A_4",
+					"price": 49000,
+					"gems": 1600,
+					"discount": 31
+				},
+				{
+					"sku": "racer_gem_A_5",
+					"price": 99000,
+					"gems": 3700,
+					"discount": 49
+				},
+				{
+					"sku": "racer_gem_A_6",
+					"price": 199000,
+					"gems": 8000,
+					"discount": 61
+				}
+			],
+			"racerCosts": {
+				"hood": {
+					"count": 5,
+					"baseCostFactor": 0.03999999910593033,
+					"costRatio": 0.004999999888241291
+				},
+				"roof": {
+					"count": 5,
+					"baseCostFactor": 0.07000000029802323,
+					"costRatio": 0.004999999888241291
+				},
+				"spoiler": {
+					"count": 5,
+					"baseCostFactor": 0.10999999940395355,
+					"costRatio": 0.004999999888241291
+				},
+				"vinyl": {
+					"count": 5,
+					"baseCostFactor": 0.12999999523162843,
+					"costRatio": 0.004999999888241291
+				},
+				"wheel": {
+					"count": 5,
+					"baseCostFactor": 0.09000000357627869,
+					"costRatio": 0.004999999888241291
+				},
+				"bodyColorCostRatio": 0.019999999552965165,
+				"windowColorCostRatio": 0.009999999776482582,
+				"lightColorCostRatio": 0.004999999888241291,
+				"speedUpgradeCostRatio": 0.012000000104308129,
+				"nitroUpgradeCostRatio": 0.014999999664723874,
+				"steeringUpgradeCostRatio": 0.004999999888241291,
+				"bodyUpgradeCostRatio": 0.00800000037997961,
+				"upgradeCostsRatio": [
+					1.0,
+					1.6304349899291993,
+					2.6086959838867189,
+					3.9130430221557619,
+					5.65217399597168,
+					7.913043022155762,
+					11.086959838867188,
+					15.5,
+					21.717390060424806,
+					30.391300201416017,
+					42.56521987915039,
+					59.56521987915039,
+					97.82608795166016
+				]
+			}
+		}
+	],
+	"probabilities": {
+		"rewardRacerRadius": 2,
+		"blackmarketRacerRadius": 3
+	},
+	"profilePreset": [
+		{
+			"gems": 30,
+			"coins": 10000,
+			"racerId": 40,
+			"rndCards": 7
+		},
+		{
+			"gems": 30,
+			"coins": 10000,
+			"racerId": 50,
+			"rndCards": 7
+		}
+	],
+	"chatList": [
+		{
+			"text": "سلام",
+			"botPosition": 15
+		},
+		{
+			"text": "حال داد",
+			"botPosition": 3
+		},
+		{
+			"text": "دم همه گرم",
+			"botPosition": 15
+		},
+		{
+			"text": "اصلا حال نداد",
+			"botPosition": 12
+		},
+		{
+			"text": "عالي بود",
+			"botPosition": 3
+		},
+		{
+			"text": "بد نبود",
+			"botPosition": 12
+		},
+		{
+			"text": "به من که حال داد",
+			"botPosition": 3
+		},
+		{
+			"text": "گند زدم",
+			"botPosition": 12
+		},
+		{
+			"text": "گند زدي",
+			"botPosition": 3
+		},
+		{
+			"text": "ماشينم رديف نبود",
+			"botPosition": 12
+		},
+		{
+			"text": "بابا برو ارتقا بده",
+			"botPosition": 3
+		},
+		{
+			"text": "پول بدم کارت بخري!",
+			"botPosition": 3
+		},
+		{
+			"text": "پول بدم ارتقا بدي!",
+			"botPosition": 3
+		},
+		{
+			"text": "پول بدم بسته بخري!",
+			"botPosition": 3
+		},
+		{
+			"text": "ماشين بهتر نداشين؟",
+			"botPosition": 3
+		},
+		{
+			"text": "فقط لحظه آخرش!!",
+			"botPosition": 15
+		},
+		{
+			"text": "اين کاره نيستين",
+			"botPosition": 3
+		},
+		{
+			"text": "گاز رو حال کردين؟",
+			"botPosition": 3
+		},
+		{
+			"text": "ماشين رو حال کردين؟",
+			"botPosition": 3
+		},
+		{
+			"text": "بيا بهت ياد بدم",
+			"botPosition": 7
+		},
+		{
+			"text": "شانس آوردي",
+			"botPosition": 14
+		},
+		{
+			"text": "حقت نبود",
+			"botPosition": 14
+		},
+		{
+			"text": "يه کم مونده بود",
+			"botPosition": 2
+		},
+		{
+			"text": "برو ديگه پيدات نشه",
+			"botPosition": 15
+		},
+		{
+			"text": "دفعه بعد مي برمت",
+			"botPosition": 14
+		},
+		{
+			"text": "عجب دست فرموني",
+			"botPosition": 14
+		},
+		{
+			"text": "خخخخخخخخ",
+			"botPosition": 0
+		},
+		{
+			"text": "هااااا هااااا",
+			"botPosition": 0
+		},
+		{
+			"text": "کجا جا موندي؟",
+			"botPosition": 1
+		},
+		{
+			"text": "پنچر کردي؟",
+			"botPosition": 1
+		},
+		{
+			"text": "به ما نمي خوري",
+			"botPosition": 3
+		},
+		{
+			"text": "خاک پاتيم",
+			"botPosition": 15
+		}
+	]
+}

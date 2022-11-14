@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `profile`;
 CREATE TABLE `profile` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `id` int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
   `username` varchar(64) CHARACTER SET ascii DEFAULT NULL,
   `password` varchar(64) CHARACTER SET ascii DEFAULT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE `profile` (
 
 DROP TABLE IF EXISTS `profile_data`;
 CREATE TABLE `profile_data` (
-  `profile_id` int(10) unsigned NOT NULL PRIMARY KEY,
+  `profile_id` int unsigned NOT NULL PRIMARY KEY,
   `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
   `private_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
   `public_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
@@ -21,26 +21,49 @@ CREATE TABLE `profile_data` (
 
 
 DROP TABLE IF EXISTS `league_name`;
-CREATE TABLE `league_name` (
-  `profile_id` int(10) unsigned NOT NULL PRIMARY KEY,
+CREATE TABLE `league_total` (
+  `profile_id` int unsigned NOT NULL PRIMARY KEY,
   `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
-  `score` int(10) DEFAULT 0,
-  `rank` int(10) DEFAULT 0,
-  `end_score` int(10) DEFAULT 0,
-  `end_rank` int(10) DEFAULT 0,
+  `score` int DEFAULT 0,
+  `rank` int DEFAULT 0,
+  `end_score` int) DEFAULT 0,
+  `end_rank` int DEFAULT 0,
   INDEX (`device_id`)
 ) ENGINE=InnoDB;
 
 
 DROP TABLE IF EXISTS `friends`;
 CREATE TABLE `friends` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `profile_id` int(10) unsigned NOT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `profile_id` int unsigned NOT NULL,
   `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
-  `friend_id` int(10) unsigned NOT NULL,
+  `friend_id` int unsigned NOT NULL,
   INDEX (`profile_id`),
   INDEX (`friend_id`),
   INDEX (`device_id`)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS `assets`;
+CREATE TABLE `assets` (
+  `id` varchar(32) NOT NULL PRIMARY KEY,
+  `profile_id` int unsigned NOT NULL,
+  `asset_id` int unsigned NOT NULL,
+  `views` int unsigned NOT NULL,
+  `likes` int NOT NULL,
+  INDEX (`profile_id`),
+  INDEX (`asset_id`)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS `likes`;
+CREATE TABLE `likes` (
+  `id` varchar(32) NOT NULL PRIMARY KEY,
+  `profile_id` int unsigned NOT NULL,
+  `owner_id` int unsigned NOT NULL,
+  `asset_id` int unsigned NOT NULL,
+  `liked` tinyint unsigned NOT NULL,
+  INDEX (`profile_id`),
+  INDEX (`owner_id`),
+  INDEX (`asset_id`)
 ) ENGINE=InnoDB;
 
 
