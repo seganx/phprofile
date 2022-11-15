@@ -19,15 +19,21 @@ if ($db == null)
     exit();
 }
 
-$db->query("SELECT asset_id, views, likes FROM assets WHERE profile_id='{$token->profile_id}'");
+$db->query("SELECT data FROM assets WHERE profile_id='{$token->profile_id}'");
 if ($db->has_result())
 {
-    $rows = array();
-    while($r = $db->result->fetch_assoc())
+    $result = new stdclass();
+    $result->assets = [];
+    $assets = json_decode($db->result->fetch_assoc()['data'], true);
+    foreach ($assets as $key => $value)
     {
-        $rows[] = $r;
+        $item = new stdclass();
+        $item->asset = $key;
+        $item->views = $value[0];
+        $item->likes = $value[1];
+        $result->assets[] = $item;
     }
-    send('ok', $rows);
+    send('ok', $result);
 }
 else
 {

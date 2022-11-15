@@ -40,14 +40,9 @@ CREATE TABLE `assets` (
 DROP TABLE IF EXISTS `likes`;
 CREATE TABLE `likes` (
   `id` varchar(32) CHARACTER SET ascii NOT NULL PRIMARY KEY,
-  `profile_id` int unsigned NOT NULL,
-  `owner_id` int unsigned NOT NULL,
   `data` JSON NOT NULL
 ) ENGINE=InnoDB;
 
-
-INSERT INTO assets (`profile_id`, `data`) VALUES (410, '{"id630":[123,5],"id535":[123,5]}');
-UPDATE assets SET `data` = JSON_SET(`data`, '$.id600', JSON_ARRAY(JSON_EXTRACT(`data`,'$.id600[0]')+1,JSON_EXTRACT(`data`,'$.id600[1]')+1)) WHERE profile_id=410;
 
 
 
@@ -115,9 +110,19 @@ DROP PROCEDURE IF EXISTS social_get_public;
 DELIMITER !!
 CREATE PROCEDURE social_get_public(o_id INT, p_id INT)
 BEGIN
-	SELECT profile_data.public_data, assets.data as `assets`, likes.data as `likes` 
-    from `profile_data`, `assets`, `likes` 
-    WHERE profile_data.profile_id=o_id AND assets.profile_id=o_id AND likes.id=CONCAT(p_id,'_',o_id);
+    SELECT profile_data.public_data, assets.data as `assets`, likes.data as `likes` 
+    from `profile_data` 
+    LEFT JOIN `assets` ON assets.profile_id=o_id
+    LEFT JOIN `likes` ON likes.id=CONCAT(p_id,'_',o_id)
+    WHERE profile_data.profile_id=o_id;
+END;
+
+DROP PROCEDURE IF EXISTS social_set;
+DELIMITER !!
+CREATE PROCEDURE social_set(p_id INT, o_id INT, a_name varchar(32), a_views INT, a_likes INT, a_liked INT)
+BEGIN
+    CALL assets_update(o_id, a_name, a_views, a_likes);
+    CALL likes_update(CONCAT(p_id, '_', o_id), a_name, a_liked);
 END;
 
 CALL social_get_public(410, 450);

@@ -29,32 +29,48 @@ if ($db == null)
 $userdata->username = addslashes($userdata->username);
 $owner_id = username_to_id($userdata->username);
 
-// first fetch public data
-$result = new stdclass();
-$db->query("SELECT public_data FROM profile_data WHERE profile_id={$owner_id}");
+$data = [];
+$db->query("CALL social_get_public({$owner_id}, {$token->profile_id})");
 if ($db->has_result())
 {
-    $result->data = $db->result->fetch_assoc()['public_data'];
+    $data = $db->result->fetch_assoc();
 }
 else
 {
     send_error(sxerror::invalid_params);
-    $db->close();
-    exit();
 }
+$db->close();
 
-$db->query("SELECT assets.asset_id, assets.views, assets.likes, likes.liked FROM assets LEFT JOIN likes ON likes.profile_id={$token->profile_id} AND likes.owner_id={$owner_id} AND likes.asset_id=assets.asset_id WHERE assets.profile_id={$owner_id};");
-if ($db->has_result())
+$result = new stdclass();
+$result->data = $data['public_data'];
+
+if (isset($data['assets']))
 {
     $result->assets = [];
-    while($r = $db->result->fetch_assoc())
+    $assets = json_decode($data['assets'], true);
+    foreach ($assets as $key => $value)
     {
-        $result->assets[] = $r;
+        $item = new stdclass();
+        $item->asset = $key;
+        $item->views = $value[0];
+        $item->likes = $value[1];
+        $result->assets[] = $item;
+    }
+}
+
+if (isset($data['likes']))
+{
+    $result->likes = [];
+    $assets = json_decode($data['likes'], true);
+    foreach ($assets as $key => $value)
+    {
+        $item = new stdclass();
+        $item->asset = $key;
+        $item->liked = $value;
+        $result->likes[] = $item;
     }
 }
 
 send('ok', $result);
-
-$db->close();
 
 ?>
