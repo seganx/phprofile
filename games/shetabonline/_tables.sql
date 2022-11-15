@@ -46,6 +46,10 @@ CREATE TABLE `likes` (
 ) ENGINE=InnoDB;
 
 
+INSERT INTO assets (`profile_id`, `data`) VALUES (410, '{"id630":[123,5],"id535":[123,5]}');
+UPDATE assets SET `data` = JSON_SET(`data`, '$.id600', JSON_ARRAY(JSON_EXTRACT(`data`,'$.id600[0]')+1,JSON_EXTRACT(`data`,'$.id600[1]')+1)) WHERE profile_id=410;
+
+
 
 DROP TABLE IF EXISTS `friends`;
 CREATE TABLE `friends` (

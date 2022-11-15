@@ -28,7 +28,9 @@ if($token->profile_id == $owner_id)
     exit();
 }
 
-$strquery = '';
+$assetJson = '';
+$likesJson = '';
+
 foreach ($userdata->changes as $item)
 {
     if (is_int($item->asset_id) && is_int($item->view) && is_int($item->like))
@@ -37,13 +39,22 @@ foreach ($userdata->changes as $item)
         $item->view = max(0, min(1, $item->view));
         $item->like = max(-1, min(1, $item->like));
         $insert_like = max(0, $item->like);
+    }
+}
+
+
+
+
+
+
+
+$strquery = '';
         $id = "{$owner_id}_{$item->asset_id}";
-        $strquery .= "INSERT INTO assets (id, profile_id, asset_id, views, likes) VALUES ('{$id}', {$owner_id}, {$item->asset_id}, {$item->view}, $insert_like) ON DUPLICATE KEY UPDATE views=views+{$item->view}, likes=GREATEST(0, likes+{$item->like});";
         
         $id = "{$token->profile_id}_{$owner_id}_{$item->asset_id}";
         $strquery .= "INSERT INTO likes (id, profile_id, owner_id, asset_id, liked) VALUES ('{$id}', {$token->profile_id}, {$owner_id}, {$item->asset_id}, $insert_like) ON DUPLICATE KEY UPDATE liked={$insert_like};";
-    }
-}
+        $strquery .= "INSERT INTO assets (id, profile_id, asset_id, views, likes) VALUES ('{$id}', {$owner_id}, {$item->asset_id}, {$item->view}, $insert_like) ON DUPLICATE KEY UPDATE views=views+{$item->view}, likes=GREATEST(0, likes+{$item->like});";
+
 if (!empty($strquery) && queue_add($strquery))
     send('ok', null);
 else
