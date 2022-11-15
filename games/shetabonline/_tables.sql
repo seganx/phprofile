@@ -77,3 +77,49 @@ SELECT token, COUNT(token) FROM purchases GROUP BY token HAVING COUNT(token) > 1
 DELETE c1 FROM purchases c1
 INNER JOIN purchases c2 
 WHERE c1.time > c2.time AND c1.token = c2.token;
+
+
+-- age of stored PROCEDURE:
+DROP FUNCTION IF EXISTS assets_update_data;
+DELIMITER $$
+CREATE FUNCTION assets_update_data(data JSON, j_name CHAR(32), a_view INT, a_like INT) RETURNS JSON DETERMINISTIC
+BEGIN
+	SET @js = JSON_EXTRACT(data, j_name);
+	SET @a0 = JSON_EXTRACT(@js, '$[0]');
+    SET @a1 = JSON_EXTRACT(@js, '$[1]');
+    SET @a0 = IF(@a0 IS NULL, 0, @a0);
+    SET @a1 = IF(@a1 IS NULL, 0, @a1);
+	return JSON_SET(data, j_name, JSON_ARRAY(@a0 + a_view, @a1 + a_like));
+END;
+
+
+DROP PROCEDURE IF EXISTS assets_update;
+DELIMITER !!
+CREATE PROCEDURE assets_update(p_id INT, a_name CHAR(32), a_view INT, a_like INT)
+BEGIN
+	INSERT INTO `assets` (`profile_id`, `data`) 
+    VALUES (p_id, assets_update_data("{}", a_name, a_view, a_like)) 
+    ON DUPLICATE KEY UPDATE `data`=assets_update_data(`data`, a_name, a_view, a_like);
+END;
+
+DROP PROCEDURE IF EXISTS likes_update;
+DELIMITER !!
+CREATE PROCEDURE likes_update(id varchar(32), a_name CHAR(32), a_liked INT)
+BEGIN
+	INSERT INTO `likes` (`id`, `data`) 
+    VALUES (id, JSON_SET("{}", a_name, a_liked)) 
+    ON DUPLICATE KEY UPDATE `data`=JSON_SET(`data`, a_name, a_liked);
+END;
+
+DROP PROCEDURE IF EXISTS social_get_public;
+DELIMITER !!
+CREATE PROCEDURE social_get_public(o_id INT, p_id INT)
+BEGIN
+	SELECT profile_data.public_data, assets.data as `assets`, likes.data as `likes` 
+    from `profile_data`, `assets`, `likes` 
+    WHERE profile_data.profile_id=o_id AND assets.profile_id=o_id AND likes.id=CONCAT(p_id,'_',o_id);
+END;
+
+CALL social_get_public(410, 450);
+CALL assets_update(410, '$.a200', 1, 0);
+CALL likes_update('410_415', '$.a200', 1);
