@@ -128,3 +128,20 @@ END;
 CALL social_get_public(410, 450);
 CALL assets_update(410, '$.a200', 1, 0);
 CALL likes_update('410_415', '$.a200', 1);
+
+
+
+DROP PROCEDURE IF EXISTS league_total_update;
+DELIMITER !!
+CREATE PROCEDURE league_total_update(s_min INT, r_count INT)
+BEGIN
+	UPDATE league_total SET rank=0;
+    
+    SET @r=0;
+    UPDATE league_total SET rank=@r:=(@r+1) WHERE score>s_min ORDER BY score DESC LIMIT 100000;
+    
+    SELECT profile.username, profile.nickname, profile.status, profile.avatar, league_total.score, league_total.rank 
+    FROM profile 
+    LEFT JOIN profile on league_total.profile_id=profile.id 
+    WHERE league_total.score>s_min && league_total.rank>0 ORDER BY league_total.rank ASC LIMIT r_count;
+END;

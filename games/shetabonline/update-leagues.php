@@ -20,22 +20,19 @@ $all = league::get_all_leagues();
 // compute ranks for each league
 foreach ($all as $key => $item)
 {
-    // reset all ranks
-    $db->query("UPDATE league_{$item->name} SET rank=0");
-
-    // set ranks base on scores
-    $db->multi_query("SET @r=0; UPDATE league_{$item->name} SET rank=@r:=(@r+1) WHERE score>0 ORDER BY score DESC LIMIT 100000;");
-
     // create list of 100 for each league
-    $rows = array();
-    $db->query("SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league_{$item->name} l LEFT JOIN profile p on l.profile_id=p.id WHERE l.score>0 && l.rank>0 ORDER BY l.rank ASC LIMIT 100");
-    while($r = $db->result->fetch_assoc())
-    {
-        $rows[] = $r;
-    }
+    $db->query("CALL league_{$item->name}_update(0, 100);");
+    if ($db->has_result())
+    {        
+        $rows = array();
+        while($r = $db->result->fetch_assoc())
+        {
+            $rows[] = $r;
+        }
 
-    // save the list to a file as cache
-    file_put_contents(dirname(__FILE__) . '/cache/leaderboard_' . $item->name . '_0_100.txt', json_encode($rows), FILE_TEXT | LOCK_EX);
+        // save the list to a file as cache
+        file_put_contents(dirname(__FILE__) . '/cache/leaderboard_' . $item->name . '_0_100.txt', json_encode($rows), FILE_TEXT | LOCK_EX);
+    }
 }
 
 $time = calendar::get_now();
