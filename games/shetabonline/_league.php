@@ -22,7 +22,7 @@ class league
     {
         $res = array();
 
-        $res['total'] = new league('total', league::mode_weekly, 0, 20);
+        $res['total'] = new league('total', league::mode_weekly, 1000, 20);
 
         return $res;
     }

@@ -24,11 +24,11 @@ foreach ($all as $key => $item)
     $db->query("UPDATE league_{$item->name} SET rank=0");
 
     // set ranks base on scores
-    $db->multi_query("SET @r=0; UPDATE league_{$item->name} SET rank=@r:=(@r+1) WHERE score>{$item->base_score} ORDER BY score DESC LIMIT 100000;");
+    $db->multi_query("SET @r=0; UPDATE league_{$item->name} SET rank=@r:=(@r+1) WHERE score>0 ORDER BY score DESC LIMIT 100000;");
 
     // create list of 100 for each league
     $rows = array();
-    $db->query("SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league_{$item->name} l LEFT JOIN profile p on l.profile_id=p.id WHERE l.score>{$item->base_score} && l.rank>0 ORDER BY l.rank ASC LIMIT 100");
+    $db->query("SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league_{$item->name} l LEFT JOIN profile p on l.profile_id=p.id WHERE l.score>0 && l.rank>0 ORDER BY l.rank ASC LIMIT 100");
     while($r = $db->result->fetch_assoc())
     {
         $rows[] = $r;
@@ -54,7 +54,7 @@ foreach ($all as $key => $item)
     {
         // create list of 3 legends
         $rows = array();
-        $db->query("SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league_{$item->name} l LEFT JOIN profile p on l.profile_id=p.id WHERE l.score>{$item->base_score} && l.rank>0 ORDER BY l.rank ASC LIMIT 3");
+        $db->query("SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league_{$item->name} l LEFT JOIN profile p on l.profile_id=p.id WHERE l.score>0 && l.rank>0 ORDER BY l.rank ASC LIMIT 3");
         while($r = $db->result->fetch_assoc())
         {
             $rows[] = $r;
