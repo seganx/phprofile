@@ -145,3 +145,18 @@ BEGIN
     LEFT JOIN profile on league_total.profile_id=profile.id 
     WHERE league_total.score>s_min && league_total.rank>0 ORDER BY league_total.rank ASC LIMIT r_count;
 END;
+
+
+DROP FUNCTION IF EXISTS league_score_add;
+DELIMITER $$
+CREATE FUNCTION league_score_add(l_curr INT, s_curr INT, s_value INT) RETURNS INT DETERMINISTIC
+BEGIN
+	RETURN IF (l_curr <> s_curr, l_curr, s_curr + s_value);
+END;
+
+DROP PROCEDURE IF EXISTS league_total_add_score;
+DELIMITER !!
+CREATE PROCEDURE league_total_add_score(p_id INT, p_dv varchar(64), s_curr INT, s_value INT)
+BEGIN
+	UPDATE league_total SET score=league_score_add(score, s_curr, if (s_value < 11, s_value, 0)) WHERE profile_id=p_id AND device_id=p_dv;
+END;

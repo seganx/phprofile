@@ -33,14 +33,8 @@ if ($league == null || $league->max_value < $userdata->value)
     send_error(sxerror::invalid_params);
     exit();
 }
+
 $finalscore = intval($userdata->score + $userdata->value);
-
-if ($userdata->value < 1)
-{
-    send('ok', $finalscore);
-    exit();
-}
-
 if (queue_add("CALL league_{$userdata->name}_add_score({$token->profile_id}, '{$token->device_id}', {$userdata->score}, {$userdata->value})"))
 {
     send('ok', $finalscore);
