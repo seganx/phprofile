@@ -21,7 +21,7 @@ class calendar
         $seconds_of_day = $time % 86400;
         $hours_of_day = (int)floor($seconds_of_day / 3600);
         $seconds_of_hour = $time % 3600;
-        $minuts_of_hour = (int)floor($seconds_of_hour / 60);
+        $minutes_of_hour = (int)floor($seconds_of_hour / 60);
         $seconds_of_minut = $time % 60;
 
         $result = new stdClass();
@@ -30,24 +30,45 @@ class calendar
         $result->day = (int)$day_of_month;
         $result->day_of_week = (int)$day_of_week;
         $result->hour = (int)$hours_of_day;
-        $result->minut = (int)$minuts_of_hour;
+        $result->minute = (int)$minutes_of_hour;
         $result->second = (int)$seconds_of_minut;
         return $result;
     }
 
-    public static function is_end_of_day(stdClass $time) : bool
+    public static function is_end_of_day(stdClass $time, bool $use_minute = true) : bool
     {
-        return $time->hour == 0 && $time->minut == 0;
+		if ($use_minute)
+        {
+			return $time->hour == 0 && $time->minut == 0;
+		}
+		else
+		{
+			return $time->hour == 0;
+		}		
     }
 
-    public static function is_end_of_week(stdClass $time) : bool
+    public static function is_end_of_week(stdClass $time, bool $use_minute = true) : bool
     {
-        return $time->day_of_week == 0 && $time->hour == 0 && $time->minut == 0;
+		if ($use_minute)
+        {
+        	return $time->day_of_week == 0 && $time->hour == 0 && $time->minut == 0;
+		}
+		else 
+		{
+			return $time->day_of_week == 0 && $time->hour == 0;
+		}
     }
 
-    public static function is_end_of_month(stdClass $time) : bool
+    public static function is_end_of_month(stdClass $time, bool $use_minute = true) : bool
     {
-        return $time->day == 0 && $time->hour == 0 && $time->minut == 0;
+		if ($use_minute)
+        {
+        	return $time->day == 0 && $time->hour == 0 && $time->minut == 0;
+		}
+		else
+		{
+			return $time->day == 0 && $time->hour == 0;
+		}
     }
 }
 

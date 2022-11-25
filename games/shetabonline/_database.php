@@ -60,8 +60,9 @@ class database
     private function close_result()
     {
         if ($this->result == null) return;
-        $this->result->free();
+		$this->result->close();
         $this->result = null;
+		while ($this->conn->more_results() && $this->conn->next_result());
     }
 
     public function close()

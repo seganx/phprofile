@@ -33,6 +33,7 @@ if ($league == null || $league->max_value < $userdata->value)
     send_error(sxerror::invalid_params);
     exit();
 }
+
 $finalscore = intval($userdata->score + $userdata->value);
 
 if ($userdata->value < 1)
