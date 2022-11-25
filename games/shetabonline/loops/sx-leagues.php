@@ -5,8 +5,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-echo "\nstarting test at "; echo date('y:m:d H:i:s'); echo "\n";
-
 require '../_configs.php';
 require '../_league.php';
 require '../_database.php';
@@ -62,7 +60,7 @@ foreach ($context->leagues as $key => $item)
 
 	if ($context->curr_ack != $context->last_ack)
 	{
-		echo "checking league {$item->name} duto ack number changed: ";
+		echo "checking league {$item->name} duto ack-number changed: ";
 		$is_daily = $item->mode == league::mode_daily && $context->is_end_of_day;
 		$is_weekly = $item->mode == league::mode_weekly && $context->is_end_of_week;
 		$is_monthly = $item->mode == league::mode_monthly && $context->is_end_of_month;
@@ -84,7 +82,7 @@ foreach ($context->leagues as $key => $item)
 				{
 					file_put_contents(dirname(__FILE__) . '/../cache/leaderboard_' . $item->name . '_last_3.txt', json_encode($rows), LOCK_EX);
 					
-					//$db->multi_query("UPDATE league_{$item->name} SET end_score=score, end_rank=rank;UPDATE league_{$item->name} SET rank=0, score={$item->base_score};");
+					$db->multi_query("UPDATE league_{$item->name} SET end_score=score, end_rank=rank;UPDATE league_{$item->name} SET rank=0, score={$item->base_score};");
 					
 					file_put_contents(ack_filename, $context->curr_ack);
 				}
@@ -95,17 +93,18 @@ foreach ($context->leagues as $key => $item)
 				echo "league_{$item->name} updated: {$db->affected_rows()} rows affected!\n";
 			}
 		}
-		else echo "not performed.\n";
-	}
-	else
-	{
-		echo "not performed du to duplicated ack number\n";
-	}
+		else 
+		{
+			echo "not performed.\n";
+			file_put_contents(ack_filename, $context->curr_ack);
+		}
 
+		
+		echo "context:";
+		echo json_encode($context);
+		echo "\n";
+	}
 }
 $db->close();
 
-echo "context:";
-echo json_encode($context);
-echo "\n";
 ?>
