@@ -75,6 +75,26 @@ WHERE c1.time > c2.time AND c1.token = c2.token;
 
 
 -- age of stored PROCEDURE:
+DROP FUNCTION IF EXISTS fix_username;
+DELIMITER $$
+CREATE FUNCTION fix_username(pid INT) RETURNS CHAR(32) DETERMINISTIC
+BEGIN
+    SET @res = LOWER(CONV(18000 + pid, 10, 26));
+    SET @res = REPLACE(@res, '0', 'q');
+    SET @res = REPLACE(@res, '1', 'r');
+    SET @res = REPLACE(@res, '2', 's');
+    SET @res = REPLACE(@res, '3', 't');
+    SET @res = REPLACE(@res, '4', 'u');
+    SET @res = REPLACE(@res, '5', 'v');
+    SET @res = REPLACE(@res, '6', 'w');
+    SET @res = REPLACE(@res, '7', 'x');
+    SET @res = REPLACE(@res, '8', 'y');
+    SET @res = REPLACE(@res, '9', 'z');
+    return @res;
+END;
+
+
+
 DROP FUNCTION IF EXISTS assets_update_data;
 DELIMITER $$
 CREATE FUNCTION assets_update_data(data JSON, j_name CHAR(32), a_view INT, a_like INT) RETURNS JSON DETERMINISTIC

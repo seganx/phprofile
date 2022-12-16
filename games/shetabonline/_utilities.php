@@ -84,12 +84,47 @@ function queue_add(string $msg): bool
 
 function id_to_username(int $id) : string
 {
-    return base_convert(1000000 + $id, 10, 32);
+    $result = base_convert(18000 + $id, 10, 26);
+    $len = strlen($result);
+    for ($i = 0; $i < $len; $i++)
+    {
+    	switch($result[$i])
+        {
+            case '0': $result[$i] = 'q'; break;
+            case '1': $result[$i] = 'r'; break;
+            case '2': $result[$i] = 's'; break;
+            case '3': $result[$i] = 't'; break;
+            case '4': $result[$i] = 'u'; break;
+            case '5': $result[$i] = 'v'; break;
+            case '6': $result[$i] = 'w'; break;
+            case '7': $result[$i] = 'x'; break;
+            case '8': $result[$i] = 'y'; break;
+            case '9': $result[$i] = 'z'; break;
+        }
+    }
+    return $result;
 }
 
 function username_to_id(string $username): int
 {
-    return base_convert($username, 32, 10) - 1000000;
+    $len = strlen($username);
+    for ($i = 0; $i < $len; $i++)
+    {
+    	switch($username[$i])
+        {
+            case 'q': $username[$i] = '0'; break;
+            case 'r': $username[$i] = '1'; break;
+            case 's': $username[$i] = '2'; break;
+            case 't': $username[$i] = '3'; break;
+            case 'u': $username[$i] = '4'; break;
+            case 'v': $username[$i] = '5'; break;
+            case 'w': $username[$i] = '6'; break;
+            case 'x': $username[$i] = '7'; break;
+            case 'y': $username[$i] = '8'; break;
+            case 'z': $username[$i] = '9'; break;
+        }
+    }
+    return base_convert($username, 26, 10) - 18000;    
 }
 
 ?>

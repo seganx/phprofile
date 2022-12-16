@@ -2,9 +2,9 @@
 
 require '_errors.php';
 require '_configs.php';
-require '_database.php';
-require '_utilities.php';
 require '_league.php';
+require '_utilities.php';
+require '_database.php';
 
 $usertoken = get_token();
 if ($usertoken == null)
@@ -44,7 +44,7 @@ $leagues = league::get_all_leagues();
 // detach current profile
 $strquery = "UPDATE profile SET device_id='none' WHERE id={$usertoken->profile_id};";
 $strquery .= "UPDATE profile_data SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
-$strquery .= "UPDATE friends SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
+//$strquery .= "UPDATE friends SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
 foreach ($leagues as $key => $item)
 {
     $strquery .= "UPDATE league_{$item->name} SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
@@ -53,7 +53,7 @@ foreach ($leagues as $key => $item)
 // attach to the profile and other tables
 $strquery .= "UPDATE profile SET device_id='{$usertoken->device_id}' WHERE id={$targetProfileId};";
 $strquery .= "UPDATE profile_data SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
-$strquery .= "UPDATE friends SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
+//$strquery .= "UPDATE friends SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
 foreach ($leagues as $key => $item)
 {
     $strquery .= "UPDATE league_{$item->name} SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
