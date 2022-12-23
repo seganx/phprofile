@@ -60,7 +60,7 @@ foreach ($context->leagues as $key => $item)
 
 	if ($context->curr_ack != $context->last_ack)
 	{
-		echo "checking league {$item->name} duto ack-number changed: ";
+		echo "checking league {$item->name} due to ack-number changed: ";
 		$is_daily = $item->mode == league::mode_daily && $context->is_end_of_day;
 		$is_weekly = $item->mode == league::mode_weekly && $context->is_end_of_week;
 		$is_monthly = $item->mode == league::mode_monthly && $context->is_end_of_month;
