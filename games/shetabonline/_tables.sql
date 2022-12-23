@@ -48,6 +48,7 @@ CREATE TABLE `purchases` (
   `id` int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `profile_id` int unsigned NOT NULL,
+  `version` varchar(16) NOT NULL,
   `market` varchar(16) NOT NULL,
   `sku` varchar(32) NOT NULL,
   `price` int NOT NULL,
