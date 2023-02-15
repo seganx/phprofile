@@ -36,6 +36,8 @@ $db->query("SELECT score, rank, end_score, end_rank FROM league_{$userdata->name
 if ($db->has_result())
 {
     $row = $db->result->fetch_assoc();
+    $result->start_time = $league->start_time;
+    $result->duration = $league->duration;
     $result->score = intval($row['score']);
     $result->rank = intval($row['rank']);
     $result->end_score = intval($row['end_score']);
@@ -44,6 +46,8 @@ if ($db->has_result())
 }
 else
 {
+    $result->start_time = $league->start_time;
+    $result->duration = $league->duration;
     $result->score = $league->base_score;
     $result->rank = rand(100000, 400000);
     $result->end_score = 0;

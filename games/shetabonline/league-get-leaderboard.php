@@ -43,6 +43,12 @@ if ($userdata->from < 2)
         $res->current = json_decode( file_get_contents($filename) );
     }
 
+    $filename = dirname(__FILE__) . '/cache/leaderboard_' . $league->name . '_total_0_100.txt';
+    if (file_exists($filename))
+    {
+        $res->total = json_decode( file_get_contents($filename) );
+    }
+
     send('ok', $res);
     exit();
 }

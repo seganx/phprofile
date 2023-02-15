@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS `profile_data`;
 CREATE TABLE `profile_data` (
   `profile_id` int unsigned NOT NULL PRIMARY KEY,
   `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
+  `gems` int DEFAULT 0,
+  `golds` int DEFAULT 0,
   `private_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
   `public_data` mediumtext CHARACTER SET ascii DEFAULT NULL,
   INDEX (`device_id`)
@@ -26,8 +28,9 @@ CREATE TABLE `league_total` (
   `device_id` varchar(64) CHARACTER SET ascii NOT NULL,
   `score` int DEFAULT 0,
   `rank` int DEFAULT 0,
-  `end_score` int) DEFAULT 0,
+  `end_score` int DEFAULT 0,
   `end_rank` int DEFAULT 0,
+  `total_score` int DEFAULT 0,
   INDEX (`device_id`)
 ) ENGINE=InnoDB;
 
@@ -119,7 +122,7 @@ END;
 
 
 DROP PROCEDURE IF EXISTS assets_update;
-DELIMITER !!
+DELIMITER $$
 CREATE PROCEDURE assets_update(p_id INT, a_name CHAR(32), a_view INT, a_like INT)
 BEGIN
 	INSERT INTO `assets` (`profile_id`, `data`) 
@@ -155,10 +158,6 @@ BEGIN
     CALL likes_update(CONCAT(p_id, '_', o_id), a_name, a_liked);
 END;
 
-CALL social_get_public(410, 450);
-CALL assets_update(410, '$.a200', 1, 0);
-CALL likes_update('410_415', '$.a200', 1);
-
 
 
 DROP PROCEDURE IF EXISTS league_total_update;
@@ -170,23 +169,33 @@ BEGIN
     SET @r=0;
     UPDATE league_total SET rank=@r:=(@r+1) WHERE score>s_min ORDER BY score DESC LIMIT 100000;
     
-    SELECT profile.username, profile.nickname, profile.status, profile.avatar, league_total.score, league_total.rank 
-    FROM profile 
-    LEFT JOIN profile on league_total.profile_id=profile.id 
-    WHERE league_total.score>s_min && league_total.rank>0 ORDER BY league_total.rank ASC LIMIT r_count;
+    SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank 
+    FROM profile p LEFT JOIN league_total l ON l.profile_id=p.id 
+    WHERE l.score>s_min && l.rank>0 
+    ORDER BY l.rank ASC LIMIT r_count;
 END;
 
 
 DROP FUNCTION IF EXISTS league_score_add;
 DELIMITER $$
-CREATE FUNCTION league_score_add(l_curr INT, s_curr INT, s_value INT) RETURNS INT DETERMINISTIC
+CREATE FUNCTION league_score_add(db_score INT, client_score INT, client_value INT) RETURNS INT DETERMINISTIC
 BEGIN
-	RETURN IF (l_curr <> s_curr, l_curr, s_curr + s_value);
+	RETURN IF (db_score <> client_score, db_score, db_score + client_value);
+END;
+
+DROP FUNCTION IF EXISTS league_score_add_total;
+DELIMITER @@
+CREATE FUNCTION league_score_add_total(db_score INT, client_score INT, db_total_score INT, client_value INT) RETURNS INT DETERMINISTIC
+BEGIN
+	RETURN IF (db_score <> client_score, db_total_score, db_total_score + client_value);
 END;
 
 DROP PROCEDURE IF EXISTS league_total_add_score;
 DELIMITER !!
 CREATE PROCEDURE league_total_add_score(p_id INT, p_dv varchar(64), s_curr INT, s_value INT)
 BEGIN
-	UPDATE league_total SET score=league_score_add(score, s_curr, if (s_value < 11, s_value, 0)) WHERE profile_id=p_id AND device_id=p_dv;
+	UPDATE league_total SET 
+    total_score=league_score_add_total(score, s_curr, total_score, s_value),
+    score=league_score_add(score, s_curr, s_value)
+    WHERE profile_id=p_id AND device_id=p_dv;
 END;
