@@ -71,12 +71,17 @@ CREATE TABLE `friends` (
 ) ENGINE=InnoDB;
 
 
+-- flag people who have invalid gems:
+SELECT * FROM `profile` p INNER JOIN `profile_data` d ON p.id=d.profile_id WHERE d.gems>100000;
+UPDATE `profile` p INNER JOIN `profile_data` d ON (p.id=d.profile_id) SET p.password='fraud' WHERE d.gems>100000;
+UPDATE `league_total` l INNER JOIN `profile_data` d ON (l.profile_id=d.profile_id) SET score=0, total_score=0 WHERE d.gems>100000;
+
 -- people who have gems but have not purchase
-SELECT p.id, s.version, s.gems, p.nickname, p.device_id 
+SELECT p.id, s.gems, p.nickname, p.device_id 
 FROM profile p
-INNER JOIN stats s ON p.id=s.profile_id 
-where s.gems>50000 AND (p.id not in (select profile_id from purchases))
-ORDER BY s.gems DESC
+INNER JOIN profile_data s ON p.id=s.profile_id 
+WHERE s.gems>50000 AND (p.id NOT IN (SELECT profile_id FROM purchases))
+ORDER BY s.gems DESC;
 
 -- display duplicated fields in a table
 SELECT token, COUNT(token) FROM purchases GROUP BY token HAVING COUNT(token) > 1;
