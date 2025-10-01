@@ -23,52 +23,40 @@ if ($league == null)
     exit();
 }
 
-$userdata->from = intval($userdata->from);
-$userdata->count = clamp(intval($userdata->count), 5, 100);
+$basefilename = dirname(__FILE__) . '/cache/leaderboard_' . $league->name;
 $res = new stdClass();
 
-// check to see if top players requested
-if ($userdata->from < 2)
+$filename = $basefilename . '_last_3.txt';
+if (file_exists($filename))
 {
-    // load last top players
-    $filename = dirname(__FILE__) . '/cache/leaderboard_' . $league->name . '_last_3.txt';
-    if (file_exists($filename))
-    {
-        $res->last = json_decode( file_get_contents($filename) );
-    }
-
-    $filename = dirname(__FILE__) . '/cache/leaderboard_' . $league->name . '_0_100.txt';
-    if (file_exists($filename))
-    {
-        $res->current = json_decode( file_get_contents($filename) );
-    }
-
-    $filename = dirname(__FILE__) . '/cache/leaderboard_' . $league->name . '_total_0_100.txt';
-    if (file_exists($filename))
-    {
-        $res->total = json_decode( file_get_contents($filename) );
-    }
-
-    send('ok', $res);
-    exit();
+    $res->last = json_decode( file_get_contents($filename) );
 }
 
-$db = database::connect();
-if ($db == null)
+$filename = $basefilename . '_0_999999.txt'; // top100
+if (file_exists($filename))
 {
-    send_error(sxerror::server_maintenance);
-    exit();
+    $res->top100 = json_decode( file_get_contents($filename) );
 }
 
-$db->query("SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league l LEFT JOIN profile p on l.profile_id=p.id WHERE l.rank>={$userdata->from} ORDER BY l.rank ASC LIMIT {$userdata->count}");
-
-$rows = array();
-while($r = $db->result->fetch_assoc())
+$filename = $basefilename . '_overall.txt';
+if (file_exists($filename))
 {
-    $rows[] = $r;
+    $res->total = json_decode( file_get_contents($filename) );
 }
-$res->current = $rows;
-$db->close();
+
+$userdata->min_score = intval($userdata->min_score);
+$userdata->max_score = intval($userdata->max_score);
+
+$filename = "{$basefilename}_{$userdata->min_score}_{$userdata->max_score}.txt";
+if (file_exists($filename))
+{
+    $res->current = json_decode( file_get_contents($filename) );
+}
+else
+{
+	$res->current = $res->top100;	
+}
+
 
 send('ok', $res);
 

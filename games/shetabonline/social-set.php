@@ -29,7 +29,7 @@ if($token->profile_id == $owner_id)
 }
 
 
-$strquery = '';
+$query_array = [];
 foreach ($userdata->changes as $item)
 {
     if (is_int($item->asset_id) && is_int($item->view) && is_int($item->like))
@@ -39,9 +39,10 @@ foreach ($userdata->changes as $item)
         $item->like = max(-1, min(1, $item->like));
         $insert_like = max(0, $item->like);
         $asset_name = '$.a' . $item->asset_id;
-        $strquery .= "CALL social_set({$token->profile_id}, {$owner_id}, '{$asset_name}', {$item->view}, {$item->like}, $insert_like);";
+        $query_array[] = "CALL social_set({$token->profile_id}, {$owner_id}, '{$asset_name}', {$item->view}, {$item->like}, $insert_like)";
     }
 }
+$strquery = join(";", $query_array);
 
 if (!empty($strquery) && queue_add($strquery))
     send('ok', null);

@@ -19,7 +19,7 @@ $userdata->item = addslashes($userdata->item);
 $userdata->price = intval($userdata->price);
 $userdata->token = addslashes($userdata->token);
 
-if (queue_add("INSERT INTO `purchases` (`profile_id`, `version`, `market`, `sku`, `price`, `token`) VALUES ({$token->profile_id}, '{$userdata->version}', '{$userdata->market}', '{$userdata->sku}', {$userdata->price}, '{$userdata->token}')"))
+if (queue_add("INSERT IGNORE INTO `purchases` (`profile_id`, `version`, `market`, `sku`, `price`, `token`) VALUES ({$token->profile_id}, '{$userdata->version}', '{$userdata->market}', '{$userdata->sku}', {$userdata->price}, '{$userdata->token}')"))
     send('ok', null);
 else
     send_error(sxerror::server_maintenance);

@@ -69,7 +69,13 @@ class database
     {
         $this->close_result();
         if ($this->conn != null) $this->conn->close();
+		$this->conn = null;
     }
+
+	public function is_null()
+	{
+		return $this->conn == null;
+	}
 
     public static function connect()
     {

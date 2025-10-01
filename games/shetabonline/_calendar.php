@@ -70,7 +70,7 @@ class calendar
         //echo "time:{$time} startTime:{$start_time} duration:{$duration} errorRange:{$error_range} | delta:{$delta} spent:{$spent} result:{$result} </br>";
 
 		$tmp = calendar::translate($duration - $spent);
-		echo 'Remained time: ' . json_encode($tmp) . "</br>";
+		//echo 'Remained time: ' . json_encode($tmp) . "\r\n";
 
         return $result;
     }    

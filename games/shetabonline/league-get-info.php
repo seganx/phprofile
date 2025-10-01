@@ -53,7 +53,7 @@ else
     $result->end_score = 0;
     $result->end_rank = 0;
 
-    if (queue_add("INSERT INTO league_{$userdata->name} (profile_id, device_id, score, rank) VALUES ('{$token->profile_id}', '{$token->device_id}', '{$result->score}', '{$result->rank}')"))
+    if (queue_add("INSERT INTO league_{$userdata->name} (profile_id, device_id, score, rank) VALUES ('{$token->profile_id}', '{$token->device_id}', '{$result->score}', '{$result->rank}') ON DUPLICATE KEY UPDATE profile_id=profile_id"))
     {
         send('ok', $result);
     }
