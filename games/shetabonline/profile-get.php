@@ -19,7 +19,7 @@ if ($db == null)
     exit();
 }
 
-$db->query("SELECT username, password, nickname, status, avatar FROM profile WHERE id='{$token->profile_id}' AND device_id='{$token->device_id}'");
+$db->query("SELECT `username`, `password`, `nickname`, `status`, `avatar` FROM `profile` WHERE `id`='{$token->profile_id}' AND `device_id`='{$token->device_id}'");
 if ($db->has_result())
 {
     send('ok', $db->result->fetch_assoc());

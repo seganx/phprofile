@@ -19,7 +19,7 @@ if ($db == null)
     exit();
 }
 
-$db->query("SELECT data FROM assets WHERE profile_id='{$token->profile_id}'");
+$db->query("SELECT `data` FROM `assets` WHERE `profile_id`='{$token->profile_id}'");
 if ($db->has_result())
 {
     $result = new stdclass();

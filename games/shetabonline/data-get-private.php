@@ -19,7 +19,7 @@ if ($db == null)
     exit();
 }
 
-$db->query("SELECT private_data FROM profile_data WHERE profile_id='{$token->profile_id}' AND device_id='{$token->device_id}'");
+$db->query("SELECT `private_data` FROM `profile_data` WHERE `profile_id`='{$token->profile_id}' AND `device_id`='{$token->device_id}'");
 if ($db->has_result())
 {
     send('ok', $db->result->fetch_assoc()['private_data']);

@@ -31,7 +31,7 @@ if ($db == null)
 }
 
 // search for target profile
-$db->query("SELECT id FROM profile WHERE username='{$userjson->username}' and password='{$userjson->password}'");
+$db->query("SELECT `id` FROM `profile` WHERE `username`='{$userjson->username}' and `password`='{$userjson->password}'");
 if ($db->no_result())
 {
     send_error(sxerror::invalid_userpass);
@@ -42,21 +42,21 @@ $targetProfileId = $db->result->fetch_assoc()['id'];
 $leagues = league::get_all_leagues();
 
 // detach current profile
-$strquery = "UPDATE profile SET device_id='none' WHERE id={$usertoken->profile_id};";
-$strquery .= "UPDATE profile_data SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
+$strquery = "UPDATE `profile` SET `device_id`='none' WHERE `id`={$usertoken->profile_id};";
+$strquery .= "UPDATE `profile_data` SET `device_id`='none' WHERE `profile_id`={$usertoken->profile_id};";
 //$strquery .= "UPDATE friends SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
 foreach ($leagues as $key => $item)
 {
-    $strquery .= "UPDATE league_{$item->name} SET device_id='none' WHERE profile_id={$usertoken->profile_id};";
+    $strquery .= "UPDATE `league_{$item->name}` SET `device_id`='none' WHERE `profile_id`={$usertoken->profile_id};";
 }
 
 // attach to the profile and other tables
-$strquery .= "UPDATE profile SET device_id='{$usertoken->device_id}' WHERE id={$targetProfileId};";
-$strquery .= "UPDATE profile_data SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
+$strquery .= "UPDATE `profile` SET `device_id`='{$usertoken->device_id}' WHERE `id`={$targetProfileId};";
+$strquery .= "UPDATE `profile_data` SET `device_id`='{$usertoken->device_id}' WHERE `profile_id`={$targetProfileId};";
 //$strquery .= "UPDATE friends SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
 foreach ($leagues as $key => $item)
 {
-    $strquery .= "UPDATE league_{$item->name} SET device_id='{$usertoken->device_id}' WHERE profile_id={$targetProfileId};";
+    $strquery .= "UPDATE `league_{$item->name}` SET `device_id`='{$usertoken->device_id}' WHERE `profile_id`={$targetProfileId};";
 }
 
 $db->multi_query($strquery);

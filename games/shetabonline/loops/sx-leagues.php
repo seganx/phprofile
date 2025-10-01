@@ -53,7 +53,7 @@ foreach ($context->leagues as $key => $item)
 		{
 			//echo "checking league {$item->name} due to ack-number changed. is_end_of_league:True\r\n";
 
-			$query = "SELECT p.username, p.nickname, p.status, p.avatar, l.score, l.rank FROM league_{$item->name} l LEFT JOIN profile p on l.profile_id=p.id WHERE l.score>0 && l.rank>0 ORDER BY l.rank ASC LIMIT 3";
+			$query = "SELECT `p`.`username`, `p`.`nickname`, `p`.`status`, `p`.`avatar`, `l`.`score`, `l`.`rank` FROM `league_{$item->name}` `l` LEFT JOIN profile `p` on `l`.`profile_id`=`p`.`id` WHERE `l`.`score`>0 && `l`.`rank`>0 ORDER BY `l`.`rank` ASC LIMIT 3";
 			//echo "Performing {$query}...\r\n";
 
             $db->query($query);
@@ -69,7 +69,7 @@ foreach ($context->leagues as $key => $item)
                 {
                     file_put_contents(dirname(__FILE__) . '/../cache/leaderboard_' . $item->name . '_last_3.txt', json_encode($rows), LOCK_EX);
 
-    			    $query = "UPDATE league_{$item->name} SET end_score=score, end_rank=rank, score={$item->base_score}, rank=0";
+    			    $query = "UPDATE `league_{$item->name}` SET `end_score`=score, `end_rank`=rank, `score`={$item->base_score}, `rank`=0";
                     $db->query($query);
 				    	
                     file_put_contents(ack_filename, $context->curr_ack);
