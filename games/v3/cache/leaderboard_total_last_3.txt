@@ -1,0 +1,1 @@
+[{"username":"slnhu","nickname":"\u0628\u0644\u0648\u0686BT","status":null,"avatar":"18","score":"130000","rank":"1"},{"username":"siqty","nickname":"YOUNES","status":null,"avatar":"0","score":"126126","rank":"2"},{"username":"sghju","nickname":"AMIR","status":null,"avatar":"6","score":"106459","rank":"3"}]
